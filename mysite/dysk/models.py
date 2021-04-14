@@ -1,10 +1,10 @@
 from django.db import models
 
-class Uzytkownik:
+
+class Uzytkownik(models.Model):
     id_uzytkownika = models.IntegerField(default=0)
     nazwa = models.CharField(max_length=200)
     haslo = models.CharField(max_length=200)
-
 
 
 class Dysk(models.Model):
@@ -13,11 +13,13 @@ class Dysk(models.Model):
     rozmiar_zajety = models.IntegerField(default=0)
     id_uzytkownika = models.ForeignKey(Uzytkownik, on_delete=models.CASCADE)
 
+
 class Katalog(models.Model):
-    id_katalogu= models.IntegerField(default=0)
+    id_katalogu = models.IntegerField(default=0)
     nazwa = models.CharField(max_length=200)
     id_dysku = models.ForeignKey(Dysk, on_delete=models.CASCADE)
     sciezka_do_katalogu = models.CharField(max_length=200)
+
 
 class Plik(models.Model):
     id_pliku = models.IntegerField(default=0)
