@@ -76,12 +76,12 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-        # 'USER': 'admin',
-        # 'PASSWORD': 'admin',
-        # 'HOST': '127.0.0.1',
-        # 'PORT': '8000',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'edysk',
+        'USER': 'postgres',
+        'PASSWORD': 'admin',
+        'HOST': 'localhost',
+
     }
 }
 
