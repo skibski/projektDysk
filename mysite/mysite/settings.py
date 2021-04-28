@@ -78,12 +78,14 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'edysk',
-        'USER': 'postgres',
-        'PASSWORD': 'admin',
-        'HOST': 'localhost',
+        'USER': 'jvfavtciryiddx',
+        'PASSWORD': 'b3d5d5d60079ba55a3bcff06931b4ed4156f155d54084508741a218c22b64421',
+        'HOST': 'ec2-108-128-104-50.eu-west-1.compute.amazonaws.com',
 
     }
 }
+
+
 
 
 # Password validation
