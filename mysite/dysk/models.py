@@ -1,17 +1,13 @@
 from django.db import models
+from django.contrib.auth import get_user_model
 
-
-class Uzytkownik(models.Model):
-    id_uzytkownika = models.IntegerField(default=0)
-    nazwa = models.CharField(max_length=200)
-    haslo = models.CharField(max_length=200)
-
+User=get_user_model()
 
 class Dysk(models.Model):
     id_dysku = models.IntegerField(default=0)
     rozmiar_calkowity = models.IntegerField(default=0)
     rozmiar_zajety = models.IntegerField(default=0)
-    id_uzytkownika = models.ForeignKey(Uzytkownik, on_delete=models.CASCADE)
+    id_user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
 class Katalog(models.Model):
