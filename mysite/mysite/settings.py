@@ -77,16 +77,15 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'edysk',
-        'USER': 'jvfavtciryiddx',
-        'PASSWORD': 'b3d5d5d60079ba55a3bcff06931b4ed4156f155d54084508741a218c22b64421',
-        'HOST': 'ec2-108-128-104-50.eu-west-1.compute.amazonaws.com',
+        'NAME': 'zxxqqaif',
+        'USER': 'zxxqqaif',
+        'PASSWORD': 'Vp5TgzZtf7kuyBSPwEkTsbZYe6RMFO82',
+        'HOST': 'tai.db.elephantsql.com',
+        'PORT': '5432',
 
     }
 }
-import dj_database_url
-db_from_env = dj_database_url.config(conn_max_age=600)
-DATABASES['default'].update(db_from_env)
+
 
 
 
