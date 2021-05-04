@@ -10,9 +10,6 @@ class Dysk(models.Model):
     rozmiar_zajety = models.IntegerField(default=0)
     id_user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.dysk_name
-
     @property
     def calculate(self):
         return (self.rozmiar_zajety * 100)/self.rozmiar_calkowity

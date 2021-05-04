@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    {% ifequal disk.id_user|stringformat:"s" user.get_username %}
+        <p>Welcome on your page, {{ user.username }}!</p>
+        <p>Here are your disks:</p>
+
+        {% for catalog in catalogs %}
+            <p>Catalog id: {{catalog.id_katalogu}}</p>
+            <p>Disk id: {{disk.id_dysku}}</p>
+            <a href="{% url 'catalog' %}{{disk.id_dysku}}/{{catalog.id_katalogu}}">   VIEW   </a>
+        {% endfor %}
+    {% else %}
+    <p>ACCESS DENIED</p>
+    {% endifequal %}
+{% else %}
+      <p>You are not logged in</p>
+{% endif %}
+{% endblock %}

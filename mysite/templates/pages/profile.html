@@ -8,7 +8,11 @@
     <p>Here are your disks:</p>
     {% for object in all_objects %}
         {% ifequal object.id_user|stringformat:"s" user.get_username %}
-        <p>Disk id: {{object.id_dysku}}.   Disk usage: {{object.calculate}}%</p>
+        <tr>
+            <p>Disk id: {{object.id_dysku}}.    Disk usage: {{object.calculate}}%</p>
+            <a href="{% url 'disk' %}{{object.id_dysku}}">   VIEW   </a>
+        </tr>
+
         {% endifequal %}
     {% endfor %}
 {% else %}

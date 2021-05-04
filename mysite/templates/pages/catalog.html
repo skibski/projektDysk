@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    {% ifequal disk.id_user|stringformat:"s" user.get_username %}
+        <p>Welcome on your page, {{ user.username }}!</p>
+        <p>Here are some catalogs:</p>
+        {% for file in files %}
+            <p>File "{{file.nazwa}}{{file.typ_pliku}}"</p>
+        {% endfor %}
+    {% else %}
+    <p>ACCESS DENIED</p>
+    {% endifequal %}
+{% else %}
+      <p>You are not logged in</p>
+{% endif %}
+{% endblock %}

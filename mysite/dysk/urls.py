@@ -10,4 +10,8 @@ urlpatterns=[
     path('profile', views.profile, name='profile'),
     path('accounts/', include('accounts.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('disk/<int:disk_id>/',views.disk, name='disk'),
+    path('disk/',views.disk, name='disk'),
+    path('catalog/<int:disk_id>/<int:catalog_id>/',views.catalog, name='catalog'),
+    path('catalog/',views.catalog, name='catalog'),
 ]
