@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
-
+from django.template import Context, Template
 
 
 class Dysk(models.Model):
@@ -10,6 +10,12 @@ class Dysk(models.Model):
     rozmiar_zajety = models.IntegerField(default=0)
     id_user = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.dysk_name
+
+    @property
+    def calculate(self):
+        return (self.rozmiar_zajety * 100)/self.rozmiar_calkowity
 
 class Katalog(models.Model):
     id_katalogu = models.IntegerField(default=0)

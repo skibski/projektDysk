@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    <p>Welcome on your page, {{ user.username }}!</p>
+    <p>Here are your disks:</p>
+    {% for object in all_objects %}
+        {% ifequal object.id_user|stringformat:"s" user.get_username %}
+        <p>Disk id: {{object.id_dysku}}.   Disk usage: {{object.calculate}}%</p>
+        {% endifequal %}
+    {% endfor %}
+{% else %}
+      <p>You are not logged in</p>
+{% endif %}
+{% endblock %}
