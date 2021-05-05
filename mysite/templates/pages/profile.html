@@ -9,8 +9,7 @@
     {% for object in all_objects %}
         {% ifequal object.id_user|stringformat:"s" user.get_username %}
         <tr>
-            <p>Disk id: {{object.id_dysku}}.    Disk usage: {{object.calculate}}%</p>
-            <a href="{% url 'disk' %}{{object.id_dysku}}">   VIEW   </a>
+            <p>Disk id: <a href="{% url 'disk' %}{{object.id_dysku}}">   {{object.id_dysku}}  </a>.    Disk usage: {{object.calculate}}%</p>
         </tr>
 
         {% endifequal %}

@@ -6,12 +6,10 @@
 {% if user.is_authenticated %}
     {% ifequal disk.id_user|stringformat:"s" user.get_username %}
         <p>Welcome on your page, {{ user.username }}!</p>
-        <p>Here are your disks:</p>
+        <p>Here are your disks {{disk.id_dysku}}:</p>
 
         {% for catalog in catalogs %}
-            <p>Catalog id: {{catalog.id_katalogu}}</p>
-            <p>Disk id: {{disk.id_dysku}}</p>
-            <a href="{% url 'catalog' %}{{disk.id_dysku}}/{{catalog.id_katalogu}}">   VIEW   </a>
+            <p>Catalog id: <a href="{% url 'catalog' %}{{disk.id_dysku}}/{{catalog.id_katalogu}}"> {{catalog.id_katalogu}} </a> </p>
         {% endfor %}
     {% else %}
     <p>ACCESS DENIED</p>
