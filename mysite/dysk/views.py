@@ -52,6 +52,11 @@ def addStandard(request, user_id):
     # profile(request)
     all_objects = Dysk.objects.all()
     context = {'all_objects': all_objects}
+    root = Katalog()
+    root.nazwa="root"
+    root.id_dysku=disk
+    root.sciezka_do_katalogu="/"
+    root.save()
     return render(request, 'pages/profile.html', context)
 
 def addPremium(request):
@@ -70,4 +75,29 @@ def addPremium(request, user_id):
     # profile(request)
     all_objects = Dysk.objects.all()
     context = {'all_objects': all_objects}
+    root = Katalog()
+    root.nazwa = "root"
+    root.id_dysku = disk
+    root.sciezka_do_katalogu = "/"
+    root.save()
+    return render(request, 'pages/profile.html', context)
+
+def addCatalog(request):
+    return render(request,'/pages/profile.html')
+
+def addCatalog(request, disk_id):
+    disk = Dysk.objects.get(id=disk_id)
+    catalog = Katalog()
+    catalog.nazwa = "new_catalog"
+    catalog.id_dysku = disk
+    catalog.sciezka_do_katalogu="/new_catalog"
+    catalog.save()
+    return render(request, 'pages/profile.html', context)
+
+def deleteCatalog(request):
+    return render(request, 'pages/profile.html', context)
+
+def deleteCatalog(request, catalog_id):
+    catalog = Katalog.objects.get(id=catalog_id)
+    catalog.delete()
     return render(request, 'pages/profile.html', context)
