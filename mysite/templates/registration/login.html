@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="jumbotron text-center">
+<h2>Log In</h2>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p}}
+  <button type="submit">Log In</button>
+    <a href="{% url 'signup' %}">Sign Up</a>
+</form>
+        </div>
+        <div class="col-sm-4"></div>
+    </div>
+</div>
+{% endblock %}
+
+ templates/registration/login.html
