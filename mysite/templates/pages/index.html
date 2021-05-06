@@ -9,8 +9,8 @@
   <a href="{% url 'profile' %}">  Go to your profile  </a>
   <!--<p><a href="{% url 'logout' %}">Log Out</a></p>-->
 {% else %}
-  <p>You are not logged in</p>
-  <a href="{% url 'login' %}">Log In</a>
-  <a href="{% url 'signup' %}">Sign Up</a>
+  <p class="mt-4 text-center">You are not logged in</p>
+  <p class="text-center" ><a class="btn btn-outline-primary" href="{% url 'login' %}">Log In</a>
+  <a class="btn btn-outline-primary" href="{% url 'signup' %}">Sign Up</a></p>
 {% endif %}
 {% endblock %}
