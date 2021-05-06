@@ -4,17 +4,20 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-    <p>Welcome on your page, {{ user.username }}!</p>
-    <p>Here are your disks:</p>
+    <h4>Welcome on your page, {{ user.username }}!</h4>
+    <h5>Here are your disks:</h5>
     {% for object in all_objects %}
         {% ifequal object.id_user|stringformat:"s" user.get_username %}
         <tr>
-            <p>Disk id: <a href="{% url 'disk' %}{{object.id_dysku}}">   {{object.id_dysku}}  </a>.    Disk usage: {{object.calculate}}%</p>
+            <p>Disk id: <a href="{% url 'disk' %}{{object.id}}">   {{object.id}}  </a>.    Disk usage: {{object.calculate}}%
+            <a href="{% url 'diskDelete' %}{{object.id}}">   Delete  </a></p>
         </tr>
-
         {% endifequal %}
     {% endfor %}
+    <h5>Add new disk:</h5>
+    <a href="{% url 'addStandard' %}/{{user.id}}">Add Standard - 5GB</a>
+    <a href="{% url 'addPremium' %}/{{user.id}}">Add Premium - 10GB</a>
 {% else %}
-      <p>You are not logged in</p>
+      <h4>You are not logged in</h4>
 {% endif %}
 {% endblock %}
