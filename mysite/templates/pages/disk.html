@@ -6,7 +6,7 @@
 {% if user.is_authenticated %}
     {% ifequal disk.id_user|stringformat:"s" user.get_username %}
     <h4>Welcome on your page, {{ user.username }}!</h4>
-        <h5>Here are your disks {{disk.id}}:</h5>
+        <h5>Here are your disk {{disk.id}}:</h5>
 
         {% for catalog in catalogs %}
             <p>Catalog id: <a href="{% url 'catalog' %}{{disk.id}}/{{catalog.id}}"> {{catalog.id}} </a> </p>
