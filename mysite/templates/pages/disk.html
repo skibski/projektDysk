@@ -5,16 +5,16 @@
 {% block content %}
 {% if user.is_authenticated %}
     {% ifequal disk.id_user|stringformat:"s" user.get_username %}
-        <p>Welcome on your page, {{ user.username }}!</p>
-        <p>Here are your disks {{disk.id_dysku}}:</p>
+    <h4>Welcome on your page, {{ user.username }}!</h4>
+        <h5>Here are your disks {{disk.id}}:</h5>
 
         {% for catalog in catalogs %}
-            <p>Catalog id: <a href="{% url 'catalog' %}{{disk.id_dysku}}/{{catalog.id_katalogu}}"> {{catalog.id_katalogu}} </a> </p>
+            <p>Catalog id: <a href="{% url 'catalog' %}{{disk.id}}/{{catalog.id}}"> {{catalog.id}} </a> </p>
         {% endfor %}
     {% else %}
-    <p>ACCESS DENIED</p>
+    <h4>ACCESS DENIED</h4>
     {% endifequal %}
 {% else %}
-      <p>You are not logged in</p>
+      <h4>You are not logged in</h4>
 {% endif %}
 {% endblock %}
