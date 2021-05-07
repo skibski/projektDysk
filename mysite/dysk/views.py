@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Dysk, Katalog, Plik
 from django.contrib.auth.models import User
+from .forms import DocumentForm
 from django.shortcuts import get_object_or_404
 
 
@@ -101,3 +102,22 @@ def deleteCatalog(request, catalog_id):
     catalog = Katalog.objects.get(id=catalog_id)
     catalog.delete()
     return render(request, 'pages/profile.html', context)
+
+def upload(request):
+    if request.user.is_authenticated:
+        # Is it better to use @login_required ?
+        username = request.user.username
+    else:
+        username = ''
+    if request.method == 'POST':
+        form = DocumentForm(request.POST, request.FILES)
+        if form.is_valid():
+            doc = form.save()
+            return render(request, 'pages/upload.html', {
+               "form": DocumentForm(),
+               "uploaded_file_url": doc.myfile.url,
+               "username": username,
+            })
+    else:
+        form = DocumentForm()
+    return render(request, 'pages/upload.html', {"form": form})

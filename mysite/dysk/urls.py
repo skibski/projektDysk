@@ -24,4 +24,5 @@ urlpatterns=[
     path('diskDelete/',views.diskDelete, name='diskDelete'),
     path('catalog/<int:disk_id>/<int:catalog_id>/',views.catalog, name='catalog'),
     path('catalog/',views.catalog, name='catalog'),
+    path('upload', views.upload, name='upload'),
 ]
