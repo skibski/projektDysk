@@ -57,6 +57,7 @@ def addStandard(request, user_id):
     root.nazwa="root"
     root.id_dysku=disk
     root.sciezka_do_katalogu="/"
+    #root.id_katalogu_nadrzednego=self.root.id
     root.save()
     return render(request, 'pages/profile.html', context)
 

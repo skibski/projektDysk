@@ -20,6 +20,7 @@ class Katalog(models.Model):
     nazwa = models.CharField(max_length=200)
     id_dysku = models.ForeignKey(Dysk, on_delete=models.CASCADE)
     sciezka_do_katalogu = models.CharField(max_length=200)
+    id_katalogu_nadrzednego = models.ForeignKey('self', on_delete=models.CASCADE)
 
 
 class Plik(models.Model):
