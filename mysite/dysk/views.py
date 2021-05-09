@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Dysk, Katalog, Plik
+from .models import Dysk, Katalog, Plik, Document
 from django.contrib.auth.models import User
 from .forms import DocumentForm
 from django.shortcuts import get_object_or_404
@@ -37,6 +37,16 @@ def catalog(request, disk_id, catalog_id):
     mydict = {'disk': disk, 'catalog': catalog, 'files': files}
     return render(request, 'pages/catalog.html', context=mydict)
 
+def catalogNadrzedny(request, disk_id, catalog_id, catalog_nadrzedny_id):
+    disk = Dysk.objects.get(id=disk_id)
+    catalog = Katalog.objects.get(id=catalog_id)
+    catalogNadrzedny = Katalog.objects.get(id=catalog_nadrzedny_id)
+    files = Plik.objects.filter(id_katalogu=catalog)
+    mydict = {'disk': disk, 'catalog': catalog, 'files': files, 'catalog_nad': catalogNadrzedny}
+    return render(request, 'pages/catalog.html', context=mydict)
+
+
+
 def addStandard(request):
     # profile(request)
     all_objects = Dysk.objects.all()
@@ -57,7 +67,6 @@ def addStandard(request, user_id):
     root.nazwa="root"
     root.id_dysku=disk
     root.sciezka_do_katalogu="/"
-    #root.id_katalogu_nadrzednego=self.root.id
     root.save()
     return render(request, 'pages/profile.html', context)
 
@@ -87,19 +96,38 @@ def addPremium(request, user_id):
 def addCatalog(request):
     return render(request,'/pages/profile.html')
 
+
+
 def addCatalog(request, disk_id):
     disk = Dysk.objects.get(id=disk_id)
+    all_objects = Katalog.objects.all()
+    context = {'all_objects': all_objects}
     catalog = Katalog()
     catalog.nazwa = "new_catalog"
     catalog.id_dysku = disk
     catalog.sciezka_do_katalogu="/new_catalog"
     catalog.save()
+    return render(request, 'pages/profile.html',context)
+
+def addCatalogNadrzedny(request, disk_id, catalog_id):
+    disk = Dysk.objects.get(id=disk_id)
+    id_katalogu=Katalog.objects.get(id=catalog_id)
+    all_objects = Katalog.objects.all()
+    context = {'all_objects': all_objects}
+    catalog = Katalog()
+    catalog.nazwa = "new_catalog_nizej"
+    catalog.id_dysku = disk
+    catalog.sciezka_do_katalogu="/new_catalog"
+    catalog.id_katalogu_nadrzednego=id_katalogu
+    catalog.save()
     return render(request, 'pages/profile.html', context)
 
-def deleteCatalog(request):
-    return render(request, 'pages/profile.html', context)
+# def deleteCatalog(request):
+#     return render(request, 'pages/profile.html', context)
 
 def deleteCatalog(request, catalog_id):
+    all_objects = Katalog.objects.all()
+    context = {'all_objects': all_objects}
     catalog = Katalog.objects.get(id=catalog_id)
     catalog.delete()
     return render(request, 'pages/profile.html', context)
@@ -109,6 +137,8 @@ def upload(request):
         # Is it better to use @login_required ?
         username = request.user.username
     else:
+        #catalog= Katalog.objects.get(id=catalog_id)
+        #disk_id= Dysk.objects.get(id=disk_id)
         username = ''
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)

@@ -20,7 +20,7 @@ class Katalog(models.Model):
     nazwa = models.CharField(max_length=200)
     id_dysku = models.ForeignKey(Dysk, on_delete=models.CASCADE)
     sciezka_do_katalogu = models.CharField(max_length=200)
-    id_katalogu_nadrzednego = models.ForeignKey('self', on_delete=models.CASCADE)
+    id_katalogu_nadrzednego = models.ForeignKey('self', on_delete=models.SET_NULL, blank=True, null=True)
 
 
 class Plik(models.Model):
@@ -35,6 +35,8 @@ class Document(models.Model):
     myfile = models.FileField(validators=[
         FileExtensionValidator(allowed_extensions=['pdf', 'doc', 'ppt', 'xlsx'])
     ])
+    catalog = models.ForeignKey(Katalog, on_delete=models.CASCADE)
+    id_dysku = models.ForeignKey(Dysk, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
