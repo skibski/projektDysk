@@ -35,8 +35,6 @@ class Document(models.Model):
     myfile = models.FileField(validators=[
         FileExtensionValidator(allowed_extensions=['pdf', 'doc', 'ppt', 'xlsx'])
     ])
-    catalog = models.ForeignKey(Katalog, on_delete=models.CASCADE)
-    id_dysku = models.ForeignKey(Dysk, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
