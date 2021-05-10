@@ -13,7 +13,6 @@
                 <a href="{% url 'deleteCatalog' %}{{catalog.id}}"> Delete </a></p>
             {% endif %}
         {% endfor %}
-    <a href="{% url 'addCatalog' %}{{disk.id}}"> + New catalog</a>
     {% else %}
     <h4>ACCESS DENIED</h4>
     {% endifequal %}

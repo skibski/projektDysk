@@ -7,14 +7,15 @@
     {% ifequal disk.id_user|stringformat:"s" user.get_username %}
         <h4>Welcome on your page, {{ user.username }}!</h4>
         <h5>Here are some catalogs:</h5>
-            {% for catalog in catalogs %}
-            <p>Catalog name: <a href="{% url 'catalogNadrzedny' %}{{disk.id}}/{{catalog.id}}/{{catalog_nad.id}}">
-                {{catalog.nazwa}} </a>   ||
-                <a href="{% url 'deleteCatalog' %}{{catalog.id}}"> Delete </a></p>
-        {% endfor %}
+            {% for sub_catalog in sub_catalogs %}
+            <p>Catalog name: <a href="{% url 'catalog' %}{{disk.id}}/{{sub_catalog.id}}">
+                {{sub_catalog.nazwa}}
+            </a>   ||
+                <a href="{% url 'deleteCatalog' %}{{sub_catalog.id}}"> Delete </a></p>
+            {% endfor %}
     <a href="{% url 'addCatalogNadrzedny' %}{{disk.id}}/{{catalog.id}}"> + New catalog</a>
         {% for file in files %}
-            <p>File "{{file.nazwa}}{{file.typ_pliku}}"</p>
+            <p>File "{{file.nazwa}}.{{file.typ_pliku}}"</p>
         {% endfor %}
     <a href="{% url 'upload' %}">Upload file</a>
     {% else %}

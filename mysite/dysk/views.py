@@ -33,8 +33,9 @@ def diskDelete(request, disk_id):
 def catalog(request, disk_id, catalog_id):
     disk = Dysk.objects.get(id=disk_id)
     catalog = Katalog.objects.get(id=catalog_id)
+    sub_catalogs = Katalog.objects.filter(id_katalogu_nadrzednego=catalog_id)
     files = Plik.objects.filter(id_katalogu=catalog)
-    mydict = {'disk': disk, 'catalog': catalog, 'files': files}
+    mydict = {'disk': disk, 'catalog': catalog, 'files': files, 'sub_catalogs': sub_catalogs}
     return render(request, 'pages/catalog.html', context=mydict)
 
 def catalogNadrzedny(request, disk_id, catalog_id, catalog_nadrzedny_id):
@@ -42,10 +43,8 @@ def catalogNadrzedny(request, disk_id, catalog_id, catalog_nadrzedny_id):
     catalog = Katalog.objects.get(id=catalog_id)
     catalogNadrzedny = Katalog.objects.get(id=catalog_nadrzedny_id)
     files = Plik.objects.filter(id_katalogu=catalog)
-    mydict = {'disk': disk, 'catalog': catalog, 'files': files, 'catalog_nad': catalogNadrzedny}
+    mydict = {'disk': disk, 'catalog': catalog, 'files': files, 'sub_catalogs': catalogNadrzedny}
     return render(request, 'pages/catalog.html', context=mydict)
-
-
 
 def addStandard(request):
     # profile(request)
@@ -95,8 +94,6 @@ def addPremium(request, user_id):
 
 def addCatalog(request):
     return render(request,'/pages/profile.html')
-
-
 
 def addCatalog(request, disk_id):
     disk = Dysk.objects.get(id=disk_id)
