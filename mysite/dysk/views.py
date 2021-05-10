@@ -126,6 +126,7 @@ def deleteCatalog(request, catalog_id):
     all_objects = Katalog.objects.all()
     context = {'all_objects': all_objects}
     catalog = Katalog.objects.get(id=catalog_id)
+    id_nadrzednego=catalog.id_katalogu_nadrzednego
     catalog.delete()
     return render(request, 'pages/profile.html', context)
 

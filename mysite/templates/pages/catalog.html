@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Profile{% endblock %}
 
@@ -9,15 +10,20 @@
         <h5>Here are some catalogs:</h5>
             {% for sub_catalog in sub_catalogs %}
             <p>Catalog name: <a href="{% url 'catalog' %}{{disk.id}}/{{sub_catalog.id}}">
+                <img src="{% static 'foto/folder.jpg'%}" width="50" height="50">
                 {{sub_catalog.nazwa}}
             </a>   ||
-                <a href="{% url 'deleteCatalog' %}{{sub_catalog.id}}"> Delete </a></p>
+                <a href="{% url 'deleteCatalog' %}{{sub_catalog.id}}">
+                <img src="{% static 'foto/delete.png'%}" width="50" height="50">
+                </a></p>
             {% endfor %}
-    <a href="{% url 'addCatalogNadrzedny' %}{{disk.id}}/{{catalog.id}}"> + New catalog</a>
+    <a href="{% url 'addCatalogNadrzedny' %}{{disk.id}}/{{catalog.id}}">
+        <img src="{% static 'foto/add.png'%}" width="50" height="50">
+        + New catalog</a>
         {% for file in files %}
             <p>File "{{file.nazwa}}.{{file.typ_pliku}}"</p>
         {% endfor %}
-    <a href="{% url 'upload' %}">Upload file</a>
+    <br><br><a href="{% url 'upload' %}">Upload file</a>
     {% else %}
     <h4>ACCESS DENIED</h4>
     {% endifequal %}

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Profile{% endblock %}
 
@@ -9,8 +10,12 @@
     {% for object in all_objects %}
         {% ifequal object.id_user|stringformat:"s" user.get_username %}
         <tr>
-            <p>Disk id: <a href="{% url 'disk' %}{{object.id}}">   {{object.id}}  </a>.    Disk usage: {{object.calculate}}%
-            <a href="{% url 'diskDelete' %}{{object.id}}">   Delete  </a></p>
+            <p>Disk id: <a href="{% url 'disk' %}{{object.id}}">
+                <img src="{% static 'foto/hdd.png'%}" width="50" height="50">
+                {{object.id}}  </a>.    Disk usage: {{object.calculate}}%
+            <a href="{% url 'diskDelete' %}{{object.id}}">
+            <img src="{% static 'foto/delete.png'%}" width="50" height="50">
+            </a></p>
         </tr>
         {% endifequal %}
     {% endfor %}
