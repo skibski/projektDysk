@@ -2,23 +2,33 @@
 
 {% block content %}
 <div class="jumbotron text-center">
-<h2>Log In</h2>
+<h1 class="h3 mt-3 mb-3 fw-normal">Log in</h1>
 </div>
 <div class="container">
     <div class="row">
         <div class="col-sm-4"></div>
+
         <div class="col-sm-4">
 <form method="post">
-  {% csrf_token %}
-  {{ form.as_p}}
-  <button type="submit">Log In</button>
-    <a href="{% url 'signup' %}">Sign Up</a>
+    {% csrf_token %}
+    <p>
+      <input style="height: 50px;margin-left: auto;margin-right: auto;" class="w-100 border-primary form-control" type="text" name="username" maxlength="150" autocapitalize="none" autocomplete="username" placeholder="Username" autofocus="" required="" id="id_username">
+    </p>
+    <p>
+    <input style="height: 50px;margin-left: auto;margin-right: auto;" class="w-100 border-primary form-control" type="password" name="password" autocomplete="current-password" placeholder="Password" required="" id="id_password1">
+    </p>
+    <div style="display: flex;" >
+        <button class="w-50 btn btn-primary" type="submit">Log In</button>
+        <a class="w-50 btn btn-outline-primary" href="{% url 'signup' %}">Sign Up</a>
+    </div>
+    <p style = "margin-top: 5px"><a style = "text-decoration: none;" href="{% url 'reset_password'%}">Nie pamiętasz hasła?</a></p>
 </form>
         </div>
-        <div class="col-sm-4">
-            <br><br>
-  <a href="{% url 'reset_password'%}">Zresetuj haslo</a>
-        </div>
+<!--    <a href="{% url 'signup' %}">Sign Up</a>-->
+<!--        <div class="col-sm-4">-->
+<!--            <br><br>-->
+<!--  <a href="{% url 'reset_password'%}">Zresetuj haslo</a>-->
+<!--        </div>-->
     </div>
 </div>
 {% endblock %}
