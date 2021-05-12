@@ -15,11 +15,11 @@
             {% for sub_catalog in sub_catalogs %}
             <tr style="border: 1px solid black;">
             <th style="border: 1px solid black;"><a href="{% url 'catalog' %}{{disk.id}}/{{sub_catalog.id}}">
-                <img src="{% static 'foto/folder2.png'%}" width="15" height="15">
+                <img src="{% static 'foto/folder2.png'%}" width="20" height="20">
                 {{sub_catalog.nazwa}}
             </a></th>
             <th style="border: 1px solid black;"><a href="{% url 'deleteCatalog' %}{{sub_catalog.id}}">
-                <img src="{% static 'foto/delete2.png'%}" width="15" height="15">
+                <img src="{% static 'foto/delete2.png'%}" width="20" height="20">
             </a></th>
             </tr>
             {% endfor %}
@@ -34,10 +34,10 @@
         </table>
     <br>
             <a href="{% url 'addCatalogNadrzedny' %}{{disk.id}}/{{catalog.id}}">
-            <img src="{% static 'foto/add2.png'%}" width="15" height="15">New catalog</a>
+            <img src="{% static 'foto/add2.png'%}" width="20" height="20">New catalog</a>
     <br>
         <a href="{% url 'upload' %}">
-            <img src="{% static 'foto/upload2.png'%}" width="15" height="15">Upload file</a>
+            <img src="{% static 'foto/upload2.png'%}" width="20" height="20">Upload file</a>
     {% else %}
     <h4>ACCESS DENIED</h4>
     {% endifequal %}

@@ -18,11 +18,11 @@
         {% ifequal object.id_user|stringformat:"s" user.get_username %}
         <tr style="border: 1px solid black;">
             <th style="border: 1px solid black;"><a href="{% url 'disk' %}{{object.id}}">
-                <img src="{% static 'foto/hdd2.png'%}" width="15" height="15">
+                <img src="{% static 'foto/hdd2.png'%}" width="20" height="20">
                 {{object.id}}  </a></th>
             <th style="border: 1px solid black;">{{object.calculate}}%</th>
             <th style="border: 1px solid black;"><a href="{% url 'diskDelete' %}{{object.id}}">
-            <img src="{% static 'foto/delete2.png'%}" width="15" height="15">
+            <img src="{% static 'foto/delete2.png'%}" width="20" height="20">
             </a></th>
         </tr>
         {% endifequal %}
