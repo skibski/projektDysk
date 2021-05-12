@@ -5,7 +5,9 @@
 {% block content %}
 {% if user.is_authenticated %}
     {% ifequal disk.id_user|stringformat:"s" user.get_username %}
+    <br>
     <h4>{{ user.username }}, here are your disk {{disk.id}}:</h4>
+    <br>
         <h6>Disk size: {{disk.rozmiar_calkowity}}GB   |   Filled at {{disk.calculate}}%</h6>
         {% for catalog in catalogs %}
             {%if catalog.id_katalogu_nadrzednego == null%}

@@ -150,3 +150,13 @@ def upload(request):
     else:
         form = DocumentForm()
     return render(request, 'pages/upload.html', {"form": form})
+
+def deleteFile(request, plik_id):
+    file = Plik.objects.get(id=plik_id)
+    catalog = file.id_katalogu
+    disk = catalog.id_dysku
+    file.delete()
+    sub_catalogs = Katalog.objects.filter(id_katalogu_nadrzednego=catalog)
+    files = Plik.objects.filter(id_katalogu=catalog)
+    mydict = {'disk': disk, 'catalog': catalog, 'files': files, 'sub_catalogs': sub_catalogs}
+    return render(request, 'pages/catalog.html', context=mydict)

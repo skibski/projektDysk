@@ -27,8 +27,10 @@
 
         {% for file in files %}
             <tr style="border: 1px solid black;">
-                <th style="border: 1px solid black;"> File "{{file.nazwa}}.{{file.typ_pliku}}"</th>
-                <th style="border: 1px solid black;"> Usuwanie"</th>
+                <th style="border: 1px solid black;"> <img src="{% static 'foto/file2.png'%}" width="20" height="20"> {{file.nazwa}}.{{file.typ_pliku}}</th>
+                <th style="border: 1px solid black;"> <a href="{% url 'deleteFile' %}{{file.id}}">
+                <img src="{% static 'foto/delete2.png'%}" width="20" height="20">
+            </a> </th>
             </tr>
         {% endfor %}
         </table>
