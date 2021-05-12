@@ -6,24 +6,38 @@
 {% block content %}
 {% if user.is_authenticated %}
     {% ifequal disk.id_user|stringformat:"s" user.get_username %}
-        <h4>Welcome on your page, {{ user.username }}!</h4>
-        <h5>Here are some catalogs:</h5>
+        <br>
+        <table cellspacing='0' cellpadding='5' border-spacing='5' style="margin:0;padding:0;border: 1px solid black;">
+            <tr style="border: 1px solid black;">
+                <th style="border: 1px solid black;">Name</th>
+                <th style="border: 1px solid black;">Delete</th>
+            </tr>
             {% for sub_catalog in sub_catalogs %}
-            <p>Catalog name: <a href="{% url 'catalog' %}{{disk.id}}/{{sub_catalog.id}}">
-                <img src="{% static 'foto/folder.jpg'%}" width="50" height="50">
+            <tr style="border: 1px solid black;">
+            <th style="border: 1px solid black;"><a href="{% url 'catalog' %}{{disk.id}}/{{sub_catalog.id}}">
+                <img src="{% static 'foto/folder2.png'%}" width="15" height="15">
                 {{sub_catalog.nazwa}}
-            </a>   ||
-                <a href="{% url 'deleteCatalog' %}{{sub_catalog.id}}">
-                <img src="{% static 'foto/delete.png'%}" width="50" height="50">
-                </a></p>
+            </a></th>
+            <th style="border: 1px solid black;"><a href="{% url 'deleteCatalog' %}{{sub_catalog.id}}">
+                <img src="{% static 'foto/delete2.png'%}" width="15" height="15">
+            </a></th>
+            </tr>
             {% endfor %}
-    <a href="{% url 'addCatalogNadrzedny' %}{{disk.id}}/{{catalog.id}}">
-        <img src="{% static 'foto/add.png'%}" width="50" height="50">
-        + New catalog</a>
+
+
         {% for file in files %}
-            <p>File "{{file.nazwa}}.{{file.typ_pliku}}"</p>
+            <tr style="border: 1px solid black;">
+                <th style="border: 1px solid black;"> File "{{file.nazwa}}.{{file.typ_pliku}}"</th>
+                <th style="border: 1px solid black;"> Usuwanie"</th>
+            </tr>
         {% endfor %}
-    <br><br><a href="{% url 'upload' %}">Upload file</a>
+        </table>
+    <br>
+            <a href="{% url 'addCatalogNadrzedny' %}{{disk.id}}/{{catalog.id}}">
+            <img src="{% static 'foto/add2.png'%}" width="15" height="15">New catalog</a>
+    <br>
+        <a href="{% url 'upload' %}">
+            <img src="{% static 'foto/upload2.png'%}" width="15" height="15">Upload file</a>
     {% else %}
     <h4>ACCESS DENIED</h4>
     {% endifequal %}

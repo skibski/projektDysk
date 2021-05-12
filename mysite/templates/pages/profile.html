@@ -5,22 +5,33 @@
 
 {% block content %}
 {% if user.is_authenticated %}
+    <br>
     <h4>Welcome on your profile, {{ user.username }}!</h4>
-    <h5>Here are your disks:</h5>
-    {% for object in all_objects %}
+    <br>
+    <table cellspacing='0' cellpadding='5' border-spacing='5' style="margin:0;padding:0;border: 1px solid black;">
+        <tr style="border: 1px solid black;">
+            <th style="border: 1px solid black;">Disk id</th>
+            <th style="border: 1px solid black;">Disk usage</th>
+            <th style="border: 1px solid black;">Delete</th>
+        </tr>
+        {% for object in all_objects %}
         {% ifequal object.id_user|stringformat:"s" user.get_username %}
-        <tr>
-            <p>Disk id: <a href="{% url 'disk' %}{{object.id}}">
-                <img src="{% static 'foto/hdd.png'%}" width="50" height="50">
-                {{object.id}}  </a>.    Disk usage: {{object.calculate}}%
-            <a href="{% url 'diskDelete' %}{{object.id}}">
-            <img src="{% static 'foto/delete.png'%}" width="50" height="50">
-            </a></p>
+        <tr style="border: 1px solid black;">
+            <th style="border: 1px solid black;"><a href="{% url 'disk' %}{{object.id}}">
+                <img src="{% static 'foto/hdd2.png'%}" width="15" height="15">
+                {{object.id}}  </a></th>
+            <th style="border: 1px solid black;">{{object.calculate}}%</th>
+            <th style="border: 1px solid black;"><a href="{% url 'diskDelete' %}{{object.id}}">
+            <img src="{% static 'foto/delete2.png'%}" width="15" height="15">
+            </a></th>
         </tr>
         {% endifequal %}
     {% endfor %}
+    </table>
+    <br>
     <h5>Add new disk:</h5>
     <a href="{% url 'addStandard' %}/{{user.id}}">Standard - 5GB</a>
+    <br>
     <a href="{% url 'addPremium' %}/{{user.id}}">Premium - 10GB</a>
 {% else %}
       <h4>You are not logged in</h4>
