@@ -8,8 +8,9 @@
         <br>
         <table cellspacing='0' cellpadding='5' border-spacing='5' style="margin:0;padding:0;border: 1px solid black;">
             <tr style="border: 1px solid black;">
-                <th style="border: 1px solid black;">Name</th>
-                <th style="border: 1px solid black;">Delete</th>
+                <th style="border: 1px solid black;text-align:center;">Name</th>
+                <th style="border: 1px solid black;text-align:center;">Delete</th>
+                <th style="border: 1px solid black;text-align:center;">Download</th>
             </tr>
             {% for sub_catalog in sub_catalogs %}
             <tr style="border: 1px solid black;">
@@ -17,9 +18,10 @@
                 <img src="{% static 'foto/folder2.png'%}" width="20" height="20">
                 {{sub_catalog.nazwa}}
             </a></th>
-            <th style="border: 1px solid black;"><a href="{% url 'deleteCatalog' %}{{sub_catalog.id}}">
+            <th style="border: 1px solid black;text-align:center;"><a href="{% url 'deleteCatalog' %}{{sub_catalog.id}}">
                 <img src="{% static 'foto/delete2.png'%}" width="20" height="20">
             </a></th>
+            <th style="border: 1px solid black;"> </th>
             </tr>
             {% endfor %}
 
@@ -27,9 +29,10 @@
         {% for file in files %}
             <tr style="border: 1px solid black;">
                 <th style="border: 1px solid black;"> <img src="{% static 'foto/file2.png'%}" width="20" height="20"> {{file.nazwa}}.{{file.typ_pliku}}</th>
-                <th style="border: 1px solid black;"> <a href="{% url 'deleteFile' %}{{file.id}}">
+                <th style="border: 1px solid black;text-align:center;"> <a href="{% url 'deleteFile' %}{{file.id}}">
                 <img src="{% static 'foto/delete2.png'%}" width="20" height="20">
             </a> </th>
+                <th style="border: 1px solid black;text-align:center;"><img src="{% static 'foto/download2.png'%}" width="20" height="20"></th>
             </tr>
         {% endfor %}
         </table>
