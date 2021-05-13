@@ -10,9 +10,9 @@
     <br>
     <table cellspacing='0' cellpadding='5' border-spacing='5' style="margin:0;padding:0;border: 1px solid black;">
         <tr style="border: 1px solid black;">
-            <th style="border: 1px solid black;">Disk id</th>
-            <th style="border: 1px solid black;">Disk usage</th>
-            <th style="border: 1px solid black;">Delete</th>
+            <th style="border: 1px solid black;text-align:center;">Disk id</th>
+            <th style="border: 1px solid black;text-align:center;">Disk usage</th>
+            <th style="border: 1px solid black;text-align:center;">Delete</th>
         </tr>
         {% for object in all_objects %}
         {% ifequal object.id_user|stringformat:"s" user.get_username %}
@@ -20,8 +20,8 @@
             <th style="border: 1px solid black;"><a href="{% url 'disk' %}{{object.id}}">
                 <img src="{% static 'foto/hdd2.png'%}" width="20" height="20">
                 {{object.id}}  </a></th>
-            <th style="border: 1px solid black;">{{object.calculate}}%</th>
-            <th style="border: 1px solid black;"><a href="{% url 'diskDelete' %}{{object.id}}">
+            <th style="border: 1px solid black;text-align:center;">{{object.calculate}}%</th>
+            <th style="border: 1px solid black;text-align:center;"><a href="{% url 'diskDelete' %}{{object.id}}">
             <img src="{% static 'foto/delete2.png'%}" width="20" height="20">
             </a></th>
         </tr>
