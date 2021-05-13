@@ -5,7 +5,7 @@ from django.contrib import admin
 from . import views
 
 urlpatterns=[
-    path('', views.index, name='index'),
+    path('', views.profile, name='profile'),
     path('about', views.about, name='about'),
     path('profile', views.profile, name='profile'),
     path('addCatalog/<int:disk_id>/',views.addCatalog, name='addCatalog'),
