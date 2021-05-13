@@ -111,26 +111,36 @@ def addCatalog(request, disk_id):
 def addCatalogNadrzedny(request, disk_id, catalog_id):
     disk = Dysk.objects.get(id=disk_id)
     id_katalogu=Katalog.objects.get(id=catalog_id)
-    all_objects = Katalog.objects.all()
-    context = {'all_objects': all_objects}
     catalog = Katalog()
     catalog.nazwa = "new_catalog_nizej"
     catalog.id_dysku = disk
     catalog.sciezka_do_katalogu="/new_catalog"
     catalog.id_katalogu_nadrzednego=id_katalogu
+
+    id_nadrzednego=catalog.id_katalogu_nadrzednego
     catalog.save()
-    return render(request, 'pages/profile.html', context)
+
+    cat = Katalog.objects.get(id=id_nadrzednego.id)
+    sub_catalogs = Katalog.objects.filter(id_katalogu_nadrzednego=id_nadrzednego.id)
+    files = Plik.objects.filter(id_katalogu=id_nadrzednego.id)
+    mydict = {'disk': disk, 'catalog': cat, 'files': files, 'sub_catalogs': sub_catalogs}
+    return render(request, 'pages/catalog.html', context=mydict)
 
 # def deleteCatalog(request):
 #     return render(request, 'pages/profile.html', context)
 
 def deleteCatalog(request, catalog_id):
-    all_objects = Katalog.objects.all()
-    context = {'all_objects': all_objects}
+
     catalog = Katalog.objects.get(id=catalog_id)
+    disk = Dysk.objects.get(id=catalog.id_dysku.id)
     id_nadrzednego=catalog.id_katalogu_nadrzednego
     catalog.delete()
-    return render(request, 'pages/profile.html', context)
+
+    catalog = Katalog.objects.get(id=id_nadrzednego.id)
+    sub_catalogs = Katalog.objects.filter(id_katalogu_nadrzednego=id_nadrzednego.id)
+    files = Plik.objects.filter(id_katalogu=id_nadrzednego.id)
+    mydict = {'disk': disk, 'catalog': catalog, 'files': files, 'sub_catalogs': sub_catalogs}
+    return render(request, 'pages/catalog.html', context=mydict)
 
 def upload(request):
     if request.user.is_authenticated:

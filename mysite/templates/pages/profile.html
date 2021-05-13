@@ -30,9 +30,9 @@
     </table>
     <br>
     <h5>Add new disk:</h5>
-    <a href="{% url 'addStandard' %}/{{user.id}}">Standard - 5GB</a>
+    <a href="{% url 'addStandard' %}/{{user.id}}"><img src="{% static 'foto/add2.png'%}" width="20" height="20"> Standard - 5GB</a>
     <br>
-    <a href="{% url 'addPremium' %}/{{user.id}}">Premium - 10GB</a>
+    <a href="{% url 'addPremium' %}/{{user.id}}"><img src="{% static 'foto/add2.png'%}" width="20" height="20"> Premium - 10GB</a>
 {% else %}
       <h4>You are not logged in</h4>
 {% endif %}
