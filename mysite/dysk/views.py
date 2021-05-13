@@ -18,9 +18,11 @@ def profile(request):
 
 def disk(request, disk_id):
     disk = Dysk.objects.get(id=disk_id)
-    catalogs = Katalog.objects.filter(id_dysku=disk)
-    mydict = {'disk': disk, 'catalogs': catalogs}
-    return render(request, 'pages/disk.html', context=mydict)
+    catalog = Katalog.objects.get(id_dysku=disk, nazwa="root")
+    sub_catalogs = Katalog.objects.filter(id_katalogu_nadrzednego=catalog)
+    files = Plik.objects.filter(id_katalogu=catalog)
+    mydict = {'disk': disk, 'catalog': catalog, 'files': files, 'sub_catalogs': sub_catalogs}
+    return render(request, 'pages/catalog.html', context=mydict)
 
 def diskDelete(request, disk_id):
     disk = Dysk.objects.get(id=disk_id)
