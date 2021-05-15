@@ -5,10 +5,28 @@
 
 {% block content %}
 {% if user.is_authenticated %}
+<div class="d-flex">
     <br>
-    <h4>Welcome on your profile, {{ user.username }}!</h4>
+    <div class="d-flex flex-column p-3 text-white  bg-dark" style="width: 280px; height: 100vh;">
+    <p class="fs-4 d-flex  align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+      Add new disk:
+    </p>
+        <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
+        <br>
+      <li class="nav-item">
+    <a href="{% url 'addStandard' %}/{{user.id}}" class="nav-link active"><img src="{% static 'foto/add2.png'%}" width="20" height="20">    Standard - 5GB</a>
+      </li>
+        <br>
+        <li class="nav-item">
+    <a href="{% url 'addPremium' %}/{{user.id}}" class="nav-link active"><img src="{% static 'foto/add2.png'%}" width="20" height="20">     Premium - 10GB</a>
+        </li></ul>
+    </div>
+    <div class="w-100 text-center mx-4">
     <br>
-    <table cellspacing='0' cellpadding='5' border-spacing='5' style="margin:0;padding:0;border: 1px solid black;">
+    <h4 style="width: 100%" >Welcome on your profile, {{ user.username }}!</h4>
+    <br>
+    <table class="w-100" cellspacing='0' cellpadding='20' border-spacing='5' style="margin:0;padding:0;border: 1px solid black;">
         <tr style="border: 1px solid black;">
             <th style="border: 1px solid black;text-align:center;">Disk id</th>
             <th style="border: 1px solid black;text-align:center;">Disk usage</th>
@@ -18,21 +36,17 @@
         {% ifequal object.id_user|stringformat:"s" user.get_username %}
         <tr style="border: 1px solid black;">
             <th style="border: 1px solid black;"><a href="{% url 'disk' %}{{object.id}}">
-                <img src="{% static 'foto/hdd2.png'%}" width="20" height="20">
+                <img src="{% static 'foto/hdd2.png'%}" width="30" height="30">
                 {{object.id}}  </a></th>
             <th style="border: 1px solid black;text-align:center;">{{object.calculate}}%</th>
             <th style="border: 1px solid black;text-align:center;"><a href="{% url 'diskDelete' %}{{object.id}}">
-            <img src="{% static 'foto/delete2.png'%}" width="20" height="20">
+            <img src="{% static 'foto/delete2.png'%}" width="30" height="30">
             </a></th>
         </tr>
         {% endifequal %}
     {% endfor %}
     </table>
-    <br>
-    <h5>Add new disk:</h5>
-    <a href="{% url 'addStandard' %}/{{user.id}}"><img src="{% static 'foto/add2.png'%}" width="20" height="20"> Standard - 5GB</a>
-    <br>
-    <a href="{% url 'addPremium' %}/{{user.id}}"><img src="{% static 'foto/add2.png'%}" width="20" height="20"> Premium - 10GB</a>
+    </div></div>
 {% else %}
       <h4>You are not logged in</h4>
 {% endif %}

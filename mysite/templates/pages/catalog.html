@@ -6,8 +6,34 @@
 {% block content %}
 {% if user.is_authenticated %}
     {% ifequal disk.id_user|stringformat:"s" user.get_username %}
+<div class="d-flex">
+    <div class="d-flex flex-column p-3 text-white  bg-dark" style="width: 280px; height: 100vh;">
+
+        <p class="fs-4 d-flex  align-items-center mx-3 mb-md-0 me-md-auto text-white text-decoration-none">
+       Disk {{disk.id}}
+    </p>
+
+        <hr>
+<ul class="nav nav-pills flex-column mb-auto">
+    <br>
+      <li class="nav-item">
+<!--          <svg class="bi me-2" width="40" height="32"></svg>-->
+            <a href="{% url 'addCatalogNadrzedny' %}{{disk.id}}/{{catalog.id}}" class="nav-link active">
+            <img src="{% static 'foto/add2.png'%}" width="20" height="20">  New catalog</a>
+      </li>
+    <br>
+    <li class="nav-item">
+<!--        <svg class="bi me-2" width="40" height="32"></svg>-->
+        <a href="{% url 'upload' %}" class="nav-link active">
+            <img src="{% static 'foto/upload2.png'%}" width="20" height="20">   Upload file</a>
+    </li>
+</ul>
+</div>
+   <div class="w-100 mx-4">
+       <br>
+       <h5> Miejsce na ścieżke</h5>
         <br>
-        <table cellspacing='0' cellpadding='5' border-spacing='5' style="margin:0;padding:0;border: 1px solid black;">
+        <table class="w-100" cellspacing='0' cellpadding='5' border-spacing='5' style="margin:0;padding:0;border: 1px solid black;">
             <tr style="border: 1px solid black;">
                 <th style="border: 1px solid black;text-align:center;">Name</th>
                 <th style="border: 1px solid black;text-align:center;">Delete</th>
@@ -16,11 +42,11 @@
             {% for sub_catalog in sub_catalogs %}
             <tr style="border: 1px solid black;">
             <th style="border: 1px solid black;"><a href="{% url 'catalog' %}{{disk.id}}/{{sub_catalog.id}}">
-                <img src="{% static 'foto/folder2.png'%}" width="20" height="20">
+                <img src="{% static 'foto/folder2.png'%}" width="30" height="30">
                 {{sub_catalog.nazwa}}
             </a></th>
             <th style="border: 1px solid black;text-align:center;"><a href="{% url 'deleteCatalog' %}{{sub_catalog.id}}">
-                <img src="{% static 'foto/delete2.png'%}" width="20" height="20">
+                <img src="{% static 'foto/delete2.png'%}" width="30" height="30">
             </a></th>
             <th style="border: 1px solid black;"> </th>
             </tr>
@@ -36,13 +62,8 @@
                 <th style="border: 1px solid black;text-align:center;"><img src="{% static 'foto/download2.png'%}" width="20" height="20"></th>
             </tr>
         {% endfor %}
-        </table>
-    <br>
-            <a href="{% url 'addCatalogNadrzedny' %}{{disk.id}}/{{catalog.id}}">
-            <img src="{% static 'foto/add2.png'%}" width="20" height="20">New catalog</a>
-    <br>
-        <a href="{% url 'upload' %}">
-            <img src="{% static 'foto/upload2.png'%}" width="20" height="20">Upload file</a>
+        </table></div>
+    </div>
     {% else %}
     <h4>ACCESS DENIED</h4>
     {% endifequal %}
