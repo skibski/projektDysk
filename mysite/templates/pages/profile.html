@@ -7,7 +7,7 @@
 {% if user.is_authenticated %}
 <div class="d-flex">
     <br>
-    <div class="d-flex flex-column p-3 text-white  bg-dark" style="width: 280px; height: 100vh;">
+    <div class="d-flex flex-column p-3 text-white  bg-dark fixed-top" style="width: 280px; height: 100vh; margin-top: 56px;">
     <p class="fs-4 d-flex  align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
       Add new disk:
     </p>
@@ -22,7 +22,7 @@
     <a href="{% url 'addPremium' %}/{{user.id}}" class="nav-link active"><img src="{% static 'foto/add2.png'%}" width="20" height="20">     Premium - 10GB</a>
         </li></ul>
     </div>
-    <div class="w-100 text-center mx-4">
+    <div class="w-100 text-center" style="margin-left: 300px; margin-right: 20px; margin-top: 66px;">
     <br>
     <h4 style="width: 100%" >Welcome on your profile, {{ user.username }}!</h4>
     <br>

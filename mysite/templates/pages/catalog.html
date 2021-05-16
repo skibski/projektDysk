@@ -32,11 +32,11 @@
    <div class="w-100 mx-4">
        <br>
        <h5><a href="{% url 'profile' %}" style="text-decoration: none; color: black;"> Profile </a>
-            >>  <a href="{% url 'disk' %}{{disk.id}}" style="text-decoration: none; color: black;"> Disk {{disk.id}} </a>
+            ||  <a href="{% url 'disk' %}{{disk.id}}" style="text-decoration: none; color: black;"> Disk {{disk.id}} </a>
        {% if catalog.nazwa != "root" %}
 <!--           {% if request.get_full_path != "/disk/66/" %}-->
 <!--           {% endif %}-->
-           >>  <a href="{% url 'catalog' %}{{disk.id}}/{{catalog.id}}" style="text-decoration: none; color: black;"> Catalog {{catalog.id}}</a>
+            ||  <a href="{% url 'catalog' %}{{disk.id}}/{{catalog.id}}" style="text-decoration: none; color: black;"> Catalog {{catalog.id}}</a>
             {% endif %}
 
 </h5>
