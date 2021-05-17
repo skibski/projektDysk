@@ -17,7 +17,7 @@ def disk(request, disk_id):
     disk = Dysk.objects.get(id=disk_id)
     catalog = Katalog.objects.get(id_dysku=disk, nazwa="root")
     sub_catalogs = Katalog.objects.filter(id_katalogu_nadrzednego=catalog)
-    files = Plik.objects.filter(id_katalogu=catalog)
+    files = Document.objects.filter(id_katalogu=catalog)
     mydict = {'disk': disk, 'catalog': catalog, 'files': files, 'sub_catalogs': sub_catalogs}
     return render(request, 'pages/catalog.html', context=mydict)
 
@@ -33,7 +33,7 @@ def catalog(request, disk_id, catalog_id):
     disk = Dysk.objects.get(id=disk_id)
     catalog = Katalog.objects.get(id=catalog_id)
     sub_catalogs = Katalog.objects.filter(id_katalogu_nadrzednego=catalog_id)
-    files = Plik.objects.filter(id_katalogu=catalog)
+    files = Document.objects.filter(id_katalogu=catalog)
     mydict = {'disk': disk, 'catalog': catalog, 'files': files, 'sub_catalogs': sub_catalogs}
     return render(request, 'pages/catalog.html', context=mydict)
 
@@ -41,7 +41,7 @@ def catalogNadrzedny(request, disk_id, catalog_id, catalog_nadrzedny_id):
     disk = Dysk.objects.get(id=disk_id)
     catalog = Katalog.objects.get(id=catalog_id)
     catalogNadrzedny = Katalog.objects.get(id=catalog_nadrzedny_id)
-    files = Plik.objects.filter(id_katalogu=catalog)
+    files = Document.objects.filter(id_katalogu=catalog)
     mydict = {'disk': disk, 'catalog': catalog, 'files': files, 'sub_catalogs': catalogNadrzedny}
     return render(request, 'pages/catalog.html', context=mydict)
 
@@ -119,7 +119,7 @@ def addCatalogNadrzedny(request, disk_id, catalog_id):
 
     cat = Katalog.objects.get(id=id_nadrzednego.id)
     sub_catalogs = Katalog.objects.filter(id_katalogu_nadrzednego=id_nadrzednego.id)
-    files = Plik.objects.filter(id_katalogu=id_nadrzednego.id)
+    files = Document.objects.filter(id_katalogu=id_nadrzednego.id)
     mydict = {'disk': disk, 'catalog': cat, 'files': files, 'sub_catalogs': sub_catalogs}
     return render(request, 'pages/catalog.html', context=mydict)
 
@@ -135,7 +135,7 @@ def deleteCatalog(request, catalog_id):
 
     catalog = Katalog.objects.get(id=id_nadrzednego.id)
     sub_catalogs = Katalog.objects.filter(id_katalogu_nadrzednego=id_nadrzednego.id)
-    files = Plik.objects.filter(id_katalogu=id_nadrzednego.id)
+    files = Document.objects.filter(id_katalogu=id_nadrzednego.id)
     mydict = {'disk': disk, 'catalog': catalog, 'files': files, 'sub_catalogs': sub_catalogs}
     return render(request, 'pages/catalog.html', context=mydict)
 
@@ -161,11 +161,11 @@ def upload(request):
     return render(request, 'pages/upload.html', {"form": form})
 
 def deleteFile(request, plik_id):
-    file = Plik.objects.get(id=plik_id)
+    file = Document.objects.get(id=plik_id)
     catalog = file.id_katalogu
     disk = catalog.id_dysku
     file.delete()
     sub_catalogs = Katalog.objects.filter(id_katalogu_nadrzednego=catalog)
-    files = Plik.objects.filter(id_katalogu=catalog)
+    files = Document.objects.filter(id_katalogu=catalog)
     mydict = {'disk': disk, 'catalog': catalog, 'files': files, 'sub_catalogs': sub_catalogs}
     return render(request, 'pages/catalog.html', context=mydict)

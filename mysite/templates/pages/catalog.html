@@ -19,13 +19,13 @@
       <li class="nav-item">
 <!--          <svg class="bi me-2" width="40" height="32"></svg>-->
             <a href="{% url 'addCatalogNadrzedny' %}{{disk.id}}/{{catalog.id}}" class="nav-link active">
-            <img src="{% static 'foto/add2.png'%}" width="20" height="20">  New catalog</a>
+            <img src="{% static 'foto/add2.png'%}" width="25" height="25">  New catalog</a>
       </li>
     <br>
     <li class="nav-item">
 <!--        <svg class="bi me-2" width="40" height="32"></svg>-->
         <a href="{% url 'upload' %}" class="nav-link active">
-            <img src="{% static 'foto/upload2.png'%}" width="20" height="20">   Upload file</a>
+            <img src="{% static 'foto/upload2.png'%}" width="25" height="25">   Upload file</a>
     </li>
 </ul>
 </div>
@@ -50,11 +50,11 @@
             {% for sub_catalog in sub_catalogs %}
             <tr style="border: 1px solid black;">
             <th style="border: 1px solid black;"><a href="{% url 'catalog' %}{{disk.id}}/{{sub_catalog.id}}">
-                <img src="{% static 'foto/folder2.png'%}" width="30" height="30">
+                <img src="{% static 'foto/folder2.png'%}" width="25" height="25">
                 {{sub_catalog.nazwa}}
             </a></th>
             <th style="border: 1px solid black;text-align:center;"><a href="{% url 'deleteCatalog' %}{{sub_catalog.id}}">
-                <img src="{% static 'foto/delete2.png'%}" width="30" height="30">
+                <img src="{% static 'foto/delete2.png'%}" width="25" height="25">
             </a></th>
             <th style="border: 1px solid black;"> </th>
             </tr>
@@ -63,11 +63,11 @@
 
         {% for file in files %}
             <tr style="border: 1px solid black;">
-                <th style="border: 1px solid black;"> <img src="{% static 'foto/file2.png'%}" width="20" height="20"> {{file.nazwa}}.{{file.typ_pliku}}</th>
+                <th style="border: 1px solid black;"> <img src="{% static 'foto/file2.png'%}" width="25" height="25"> {{file.name}}.{{file.typ_pliku}}</th>
                 <th style="border: 1px solid black;text-align:center;"> <a href="{% url 'deleteFile' %}{{file.id}}">
-                <img src="{% static 'foto/delete2.png'%}" width="20" height="20">
+                <img src="{% static 'foto/delete2.png'%}" width="25" height="25">
             </a> </th>
-                <th style="border: 1px solid black;text-align:center;"><img src="{% static 'foto/download2.png'%}" width="20" height="20"></th>
+                <th style="border: 1px solid black;text-align:center;"><img src="{% static 'foto/download2.png'%}" width="25" height="25"></th>
             </tr>
         {% endfor %}
         </table></div>

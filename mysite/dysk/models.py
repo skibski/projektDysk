@@ -31,7 +31,11 @@ class Plik(models.Model):
     sciezka_do_pliku = models.CharField(max_length=200)
 
 class Document(models.Model):
+    id_dokumentu = models.IntegerField(default=0)
+    id_katalogu = models.ForeignKey(Katalog, on_delete=models.CASCADE, default=0)
     name = models.CharField(max_length=255, default='Document_name')
+    typ_pliku = models.CharField(max_length=200,default="*")
+    sciezka_do_pliku = models.CharField(max_length=200,default="/")
     myfile = models.FileField(validators=[
         FileExtensionValidator(allowed_extensions=['pdf', 'doc', 'ppt', 'xlsx'])
     ])
