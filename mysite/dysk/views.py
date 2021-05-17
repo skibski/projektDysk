@@ -160,6 +160,9 @@ def upload(request):
         form = DocumentForm()
     return render(request, 'pages/upload.html', {"form": form})
 
+def download(request):
+    return render(request, 'pages/about.html')
+
 def deleteFile(request, plik_id):
     file = Document.objects.get(id=plik_id)
     catalog = file.id_katalogu

@@ -37,7 +37,7 @@ class Document(models.Model):
     typ_pliku = models.CharField(max_length=200,default="*")
     sciezka_do_pliku = models.CharField(max_length=200,default="/")
     myfile = models.FileField(validators=[
-        FileExtensionValidator(allowed_extensions=['pdf', 'doc', 'ppt', 'xlsx'])
+        FileExtensionValidator(allowed_extensions=['pdf', 'doc', 'ppt', 'xlsx', 'txt', 'jpg', 'png'])
     ])
 
     def __str__(self):

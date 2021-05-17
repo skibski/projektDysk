@@ -45,7 +45,6 @@
             <tr style="border: 1px solid black;">
                 <th style="border: 1px solid black;text-align:center;">Name</th>
                 <th style="border: 1px solid black;text-align:center;">Delete</th>
-                <th style="border: 1px solid black;text-align:center;">Download</th>
             </tr>
             {% for sub_catalog in sub_catalogs %}
             <tr style="border: 1px solid black;">
@@ -56,18 +55,18 @@
             <th style="border: 1px solid black;text-align:center;"><a href="{% url 'deleteCatalog' %}{{sub_catalog.id}}">
                 <img src="{% static 'foto/delete2.png'%}" width="25" height="25">
             </a></th>
-            <th style="border: 1px solid black;"> </th>
             </tr>
             {% endfor %}
 
 
         {% for file in files %}
             <tr style="border: 1px solid black;">
-                <th style="border: 1px solid black;"> <img src="{% static 'foto/file2.png'%}" width="25" height="25"> {{file.name}}.{{file.typ_pliku}}</th>
+                <th style="border: 1px solid black;">
+                    <a  href = "{{file.myfile.url}}" download> <img src="{% static 'foto/file2.png'%}" width="25" height="25"> {{file.myfile.name}}</a>
+                    </th>
                 <th style="border: 1px solid black;text-align:center;"> <a href="{% url 'deleteFile' %}{{file.id}}">
                 <img src="{% static 'foto/delete2.png'%}" width="25" height="25">
             </a> </th>
-                <th style="border: 1px solid black;text-align:center;"><img src="{% static 'foto/download2.png'%}" width="25" height="25"></th>
             </tr>
         {% endfor %}
         </table></div>

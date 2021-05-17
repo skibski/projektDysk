@@ -26,6 +26,7 @@ urlpatterns=[
     path('catalog/<int:disk_id>/<int:catalog_nadrzedny_id>/<int:catalog_id>>', views.catalog, name='catalog'),
     path('catalog/',views.catalog, name='catalog'),
     path('upload/', views.upload, name='upload'),
+    path('download/',views.download, name='download'),
     path('deleteFile/<int:plik_id>/',views.deleteFile, name='deleteFile'),
     path('deleteFile/',views.deleteFile, name='deleteFile'),
     path('addCatalogNadrzedny/<int:disk_id>/<int:catalog_id>', views.addCatalogNadrzedny, name='addCatalogNadrzedny'),
