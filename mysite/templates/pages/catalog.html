@@ -24,7 +24,7 @@
     <br>
     <li class="nav-item">
 <!--        <svg class="bi me-2" width="40" height="32"></svg>-->
-        <a href="{% url 'upload' %}" class="nav-link active">
+        <a href="{% url 'upload' %}{{disk.id}}" class="nav-link active">
             <img src="{% static 'foto/upload2.png'%}" width="25" height="25">   Upload file</a>
     </li>
 </ul>
@@ -44,6 +44,7 @@
         <table class="w-100" cellspacing='0' cellpadding='5' border-spacing='5' style="margin:0;padding:0;border: 1px solid black;">
             <tr style="border: 1px solid black;">
                 <th style="border: 1px solid black;text-align:center;">Name</th>
+                <th style="border: 1px solid black;text-align:center;">Size</th>
                 <th style="border: 1px solid black;text-align:center;">Delete</th>
             </tr>
             {% for sub_catalog in sub_catalogs %}
@@ -52,6 +53,7 @@
                 <img src="{% static 'foto/folder2.png'%}" width="25" height="25">
                 {{sub_catalog.nazwa}}
             </a></th>
+            <th style="border: 1px solid black;">  </th>
             <th style="border: 1px solid black;text-align:center;"><a href="{% url 'deleteCatalog' %}{{sub_catalog.id}}">
                 <img src="{% static 'foto/delete2.png'%}" width="25" height="25">
             </a></th>
@@ -62,8 +64,11 @@
         {% for file in files %}
             <tr style="border: 1px solid black;">
                 <th style="border: 1px solid black;">
-                    <a  href = "{{file.myfile.url}}" download> <img src="{% static 'foto/file2.png'%}" width="25" height="25"> {{file.myfile.name}}</a>
-                    </th>
+                    <a  href = "{{file.myfile.url}}" download> <img src="{% static 'foto/file2.png'%}" width="25" height="25"> {{file.myfile.name}}   </a>
+                </th>
+                <th style="border: 1px solid black;text-align:center;">
+                     {{file.myfile.size}}B
+                </th>
                 <th style="border: 1px solid black;text-align:center;"> <a href="{% url 'deleteFile' %}{{file.id}}">
                 <img src="{% static 'foto/delete2.png'%}" width="25" height="25">
             </a> </th>

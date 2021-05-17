@@ -54,7 +54,7 @@ def addStandard(request):
 def addStandard(request, user_id):
     u = User.objects.get(id=user_id)
     disk = Dysk()
-    disk.rozmiar_calkowity=5
+    disk.rozmiar_calkowity=1
     disk.rozmiar_zajety=0
     disk.id_user=u
     disk.save()
@@ -77,7 +77,7 @@ def addPremium(request):
 def addPremium(request, user_id):
     u = User.objects.get(id=user_id)
     disk = Dysk()
-    disk.rozmiar_calkowity=10
+    disk.rozmiar_calkowity=5
     disk.rozmiar_zajety=0
     disk.id_user=u
     disk.save()
@@ -139,18 +139,22 @@ def deleteCatalog(request, catalog_id):
     mydict = {'disk': disk, 'catalog': catalog, 'files': files, 'sub_catalogs': sub_catalogs}
     return render(request, 'pages/catalog.html', context=mydict)
 
-def upload(request):
+def upload(request, disk_id):
+    dysk = Dysk.objects.get(id=disk_id)
     if request.user.is_authenticated:
         # Is it better to use @login_required ?
         username = request.user.username
     else:
         #catalog= Katalog.objects.get(id=catalog_id)
-        #disk_id= Dysk.objects.get(id=disk_id)
         username = ''
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)
         if form.is_valid():
             doc = form.save()
+            s = dysk.rozmiar_zajety
+            s = s+doc.myfile.size
+            Dysk.objects.filter(id=disk_id).update(rozmiar_zajety=s)
+
             return render(request, 'pages/upload.html', {
                "form": DocumentForm(),
                "uploaded_file_url": doc.myfile.url,
@@ -160,13 +164,16 @@ def upload(request):
         form = DocumentForm()
     return render(request, 'pages/upload.html', {"form": form})
 
-def download(request):
-    return render(request, 'pages/about.html')
-
 def deleteFile(request, plik_id):
     file = Document.objects.get(id=plik_id)
     catalog = file.id_katalogu
     disk = catalog.id_dysku
+
+    s = disk.rozmiar_zajety
+    s = s - file.myfile.size
+    Dysk.objects.filter(id=disk.id).update(rozmiar_zajety=s)
+
+    file.myfile.delete()
     file.delete()
     sub_catalogs = Katalog.objects.filter(id_katalogu_nadrzednego=catalog)
     files = Document.objects.filter(id_katalogu=catalog)
