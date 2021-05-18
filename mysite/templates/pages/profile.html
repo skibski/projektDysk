@@ -15,11 +15,11 @@
     <ul class="nav nav-pills flex-column mb-auto">
         <br>
       <li class="nav-item">
-    <a href="{% url 'addStandard' %}/{{user.id}}" class="nav-link active"><img src="{% static 'foto/add2.png'%}" width="20" height="20">    Standard - 5GB</a>
+    <a href="{% url 'addStandard' %}/{{user.id}}" class="nav-link active"><img src="{% static 'foto/add2.png'%}" width="20" height="20">    Standard - 1KB</a>
       </li>
         <br>
         <li class="nav-item">
-    <a href="{% url 'addPremium' %}/{{user.id}}" class="nav-link active"><img src="{% static 'foto/add2.png'%}" width="20" height="20">     Premium - 10GB</a>
+    <a href="{% url 'addPremium' %}/{{user.id}}" class="nav-link active"><img src="{% static 'foto/add2.png'%}" width="20" height="20">     Premium - 5KB</a>
         </li></ul>
     </div>
     <div class="w-100 text-center" style="margin-left: 300px; margin-right: 20px;">
@@ -35,7 +35,11 @@
         {% for object in all_objects %}
         {% ifequal object.id_user|stringformat:"s" user.get_username %}
         <tr style="border: 1px solid black;">
-            <th style="border: 1px solid black;"><a href="{% url 'disk' %}{{object.id}}">
+            <th style="border: 1px solid black;">
+                {% ifequal object.rozmiar_calkowity 5 %}
+                    <img src="{% static 'foto/star2.png'%}" width="20" height="20">
+                {% endifequal%}
+                <a href="{% url 'disk' %}{{object.id}}">
                 <img src="{% static 'foto/hdd2.png'%}" width="25" height="25">
                 {{object.id}}  </a></th>
             <th style="border: 1px solid black;text-align:center;">{{object.calculate}}%</th>

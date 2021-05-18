@@ -13,7 +13,7 @@ class Dysk(models.Model):
 
     @property
     def calculate(self):
-        return (self.rozmiar_zajety * 100)/self.rozmiar_calkowity
+        return (self.rozmiar_zajety * 100)/(self.rozmiar_calkowity*1000)
 
 class Katalog(models.Model):
     id_katalogu = models.IntegerField(default=0)
