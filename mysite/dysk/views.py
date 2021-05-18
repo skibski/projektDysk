@@ -139,8 +139,9 @@ def deleteCatalog(request, catalog_id):
     mydict = {'disk': disk, 'catalog': catalog, 'files': files, 'sub_catalogs': sub_catalogs}
     return render(request, 'pages/catalog.html', context=mydict)
 
-def upload(request, disk_id):
-    dysk = Dysk.objects.get(id=disk_id)
+def upload(request, disk_id, catalog_id):
+    disk = Dysk.objects.get(id=disk_id)
+    catalog = Katalog.objects.get(id=catalog_id)
     if request.user.is_authenticated:
         # Is it better to use @login_required ?
         username = request.user.username
@@ -151,7 +152,7 @@ def upload(request, disk_id):
         form = DocumentForm(request.POST, request.FILES)
         if form.is_valid():
             doc = form.save()
-            s = dysk.rozmiar_zajety
+            s = disk.rozmiar_zajety
             s = s+doc.myfile.size
             Dysk.objects.filter(id=disk_id).update(rozmiar_zajety=s)
 
@@ -159,10 +160,12 @@ def upload(request, disk_id):
                "form": DocumentForm(),
                "uploaded_file_url": doc.myfile.url,
                "username": username,
+               "disk": disk,
+               "catalog": catalog
             })
     else:
         form = DocumentForm()
-    return render(request, 'pages/upload.html', {"form": form})
+    return render(request, 'pages/upload.html', {"form": form, "disk": disk, "catalog": catalog})
 
 def deleteFile(request, plik_id):
     file = Document.objects.get(id=plik_id)

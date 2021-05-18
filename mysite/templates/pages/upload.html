@@ -1,14 +1,18 @@
 {% extends 'base.html' %}
-
+{% load static %}
 
 {% block content %}
+
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_p }}
+
+    <p class="d-none" ><label for="id_id_katalogu">Id katalogu:</label> <select name="id_katalogu" id="id_id_katalogu">
+  <option value={{catalog.id}}>Katalog object {{catalog.id}}</option>
+</select></p>
+<p><label for="id_myfile">Myfile:</label> <input type="file" name="myfile" required="" id="id_myfile"></p>
     <input type="submit" value="Upload">
 </form>
-{% if uploaded_file_url %}
+    {% if uploaded_file_url %}
     <p>File uploaded</p>
-{% endif %}
-
+    {% endif %}
 {% endblock %}

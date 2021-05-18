@@ -5,5 +5,5 @@ class DocumentForm(forms.ModelForm):
         model = Document
         # fields = '__all__'
         fields = [
-            'id_katalogu','myfile'
+            'myfile'
         ]
