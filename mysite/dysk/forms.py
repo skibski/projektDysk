@@ -7,3 +7,4 @@ class DocumentForm(forms.ModelForm):
         fields = [
             'id_katalogu','myfile'
         ]
+
