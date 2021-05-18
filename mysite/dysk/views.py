@@ -109,7 +109,10 @@ def addCatalogNadrzedny(request, disk_id, catalog_id):
     disk = Dysk.objects.get(id=disk_id)
     id_katalogu=Katalog.objects.get(id=catalog_id)
     catalog = Katalog()
-    catalog.nazwa = "new_catalog_nizej"
+    catalog.nazwa = request.GET.get('folder')
+    catalog.id_dysku = disk
+    catalog.sciezka_do_katalogu = "/new_catalog"
+    catalog.id_katalogu_nadrzednego = id_katalogu
     catalog.id_dysku = disk
     catalog.sciezka_do_katalogu="/new_catalog"
     catalog.id_katalogu_nadrzednego=id_katalogu
