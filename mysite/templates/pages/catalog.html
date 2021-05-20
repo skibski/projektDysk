@@ -20,9 +20,9 @@
       <li class="nav-item">
 <!--          <svg class="bi me-2" width="40" height="32"></svg>-->
             <form role="form" method="get" action="{% url 'addCatalogNadrzedny' %}{{disk.id}}/{{catalog.id}}">
-          <input type="text" name="folder" class="form-control" placeholder="Folder name" id="folder">
+          <input type="text" name="folder" class="w-100 border-primary form-control" placeholder="Folder name" id="folder">
 <!--            <a href="{% url 'addCatalogNadrzedny' %}{{disk.id}}/{{catalog.id}}" class="nav-link active btn btn-success">-->
-              <input type="submit" value="dodaj">
+              <div class="mt-2 ml-r w-100"><input class="btn btn-primary" type="submit" value="dodaj"></div>
 <!--            <img src="{% static 'foto/add2.png'%}" width="25" height="25">  New catalog</a>-->
           </form>
       </li>
