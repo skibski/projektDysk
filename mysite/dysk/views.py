@@ -1,16 +1,21 @@
 from django.shortcuts import render
-from .models import Dysk, Katalog, Plik, Document
+from .models import Dysk, Katalog, Plik, Document, Widok
 from django.contrib.auth.models import User
 from .forms import DocumentForm
 from django.shortcuts import get_object_or_404
 
 
 def about(request):
-    return render(request, 'pages/about.html')
+    view1 = Widok.objects.get(nazwa="about.html_head")
+    view2 = Widok.objects.get(nazwa="about.html")
+    context = {'view1': view1,'view2': view2}
+    return render(request, 'pages/about.html', context)
 
 def profile(request):
     all_objects=Dysk.objects.all()
-    context={'all_objects': all_objects}
+    view1 = Widok.objects.get(nazwa="profile.html_adding")
+    view2 = Widok.objects.get(nazwa="profile.html_welcome")
+    context={'all_objects': all_objects, 'view1': view1, 'view2': view2}
     return render(request,'pages/profile.html', context)
 
 def disk(request, disk_id):
@@ -18,7 +23,9 @@ def disk(request, disk_id):
     catalog = Katalog.objects.get(id_dysku=disk, nazwa="root")
     sub_catalogs = Katalog.objects.filter(id_katalogu_nadrzednego=catalog)
     files = Document.objects.filter(id_katalogu=catalog)
-    mydict = {'disk': disk, 'catalog': catalog, 'files': files, 'sub_catalogs': sub_catalogs}
+    view1 = Widok.objects.get(nazwa="catalog.html_adding_folder")
+    view2 = Widok.objects.get(nazwa="catalog.html_uploading_file")
+    mydict = {'disk': disk, 'catalog': catalog, 'files': files, 'sub_catalogs': sub_catalogs, 'view1': view1, 'view2': view2}
     return render(request, 'pages/catalog.html', context=mydict)
 
 def diskDelete(request, disk_id):
@@ -34,7 +41,9 @@ def catalog(request, disk_id, catalog_id):
     catalog = Katalog.objects.get(id=catalog_id)
     sub_catalogs = Katalog.objects.filter(id_katalogu_nadrzednego=catalog_id)
     files = Document.objects.filter(id_katalogu=catalog)
-    mydict = {'disk': disk, 'catalog': catalog, 'files': files, 'sub_catalogs': sub_catalogs}
+    view1 = Widok.objects.get(nazwa="catalog.html_adding_folder")
+    view2 = Widok.objects.get(nazwa="catalog.html_uploading_file")
+    mydict = {'disk': disk, 'catalog': catalog, 'files': files, 'sub_catalogs': sub_catalogs, 'view1': view1, 'view2': view2}
     return render(request, 'pages/catalog.html', context=mydict)
 
 def catalogNadrzedny(request, disk_id, catalog_id, catalog_nadrzedny_id):

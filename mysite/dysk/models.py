@@ -42,3 +42,8 @@ class Document(models.Model):
 
     def __str__(self):
         return self.name
+
+class Widok(models.Model):
+    id_widoku = models.IntegerField(default=0)
+    nazwa = models.CharField(max_length=255,default="*")
+    tresc = models.TextField(default='Text sample')
