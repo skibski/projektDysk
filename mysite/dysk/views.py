@@ -114,6 +114,15 @@ def addCatalog(request, disk_id):
     catalog.save()
     return render(request, 'pages/profile.html',context)
 
+def changeNameFolder(request, folder_id):
+
+    test = Katalog.objects.get(id=folder_id)
+    test.nazwa = request.GET.get('changeFolder')
+    test.save(update_fields=['nazwa'])
+    all_objects = Katalog.objects.all()
+    context = {'all_objects': all_objects}
+    return render(request, 'pages/catalog.html', context)
+
 def addCatalogNadrzedny(request, disk_id, catalog_id):
     disk = Dysk.objects.get(id=disk_id)
     id_katalogu=Katalog.objects.get(id=catalog_id)
@@ -122,9 +131,6 @@ def addCatalogNadrzedny(request, disk_id, catalog_id):
     catalog.id_dysku = disk
     catalog.sciezka_do_katalogu = "/new_catalog"
     catalog.id_katalogu_nadrzednego = id_katalogu
-    catalog.id_dysku = disk
-    catalog.sciezka_do_katalogu="/new_catalog"
-    catalog.id_katalogu_nadrzednego=id_katalogu
 
     id_nadrzednego=catalog.id_katalogu_nadrzednego
     catalog.save()
@@ -194,3 +200,5 @@ def deleteFile(request, plik_id):
     files = Document.objects.filter(id_katalogu=catalog)
     mydict = {'disk': disk, 'catalog': catalog, 'files': files, 'sub_catalogs': sub_catalogs}
     return render(request, 'pages/catalog.html', context=mydict)
+
+

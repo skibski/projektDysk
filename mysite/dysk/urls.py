@@ -33,4 +33,6 @@ urlpatterns=[
     path('addCatalogNadrzedny/', views.addCatalogNadrzedny, name='addCatalogNadrzedny'),
     path('catalogNadrzedny/<int:disk_id>/<int:catalog_id>/<int:catalog>', views.catalogNadrzedny, name='CatalogNadrzedny'),
     path('catalogNadrzedny/', views.catalogNadrzedny, name='CatalogNadrzedny'),
+    path('changeNameFolder/<int:folder_id>', views.changeNameFolder, name='changeNameFolder'),
+    path('changeNameFolder/', views.changeNameFolder, name='changeNameFolder'),
 ]
