@@ -116,6 +116,14 @@ def changeNameFolder(request, folder_id):
     context = {'all_objects': all_objects}
     return render(request, 'pages/catalog.html', context)
 
+
+
+
+def shareFile(request, file_id):
+    file = Document.objects.get(id=file_id)
+    context = {'file': file}
+    return render(request, 'pages/shareFile.html', context)
+
 def addCatalogNadrzedny(request, disk_id, catalog_id):
     disk = Dysk.objects.get(id=disk_id)
     id_katalogu=Katalog.objects.get(id=catalog_id)
@@ -270,3 +278,4 @@ def pasteFile(request, disk_id, catalog_id):
     mydict = {'disk': disk, 'catalog': catalog, 'files': files, 'sub_catalogs': sub_catalogs, 'view1': view1,
               'view2': view2}
     return render(request, 'pages/catalog.html', context=mydict)
+

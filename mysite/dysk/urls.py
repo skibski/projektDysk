@@ -39,4 +39,6 @@ urlpatterns=[
     path('copyFile/', views.copyFile, name='copyFile'),
     path('pasteFile/<int:disk_id>/<int:catalog_id>/', views.pasteFile, name='pasteFile'),
     path('pasteFile/', views.pasteFile, name='pasteFile'),
+    path('shareFile/', views.shareFile, name='shareFile'),
+    path('shareFile/<int:file_id>/', views.shareFile, name='shareFile'),
 ]
