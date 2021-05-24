@@ -30,7 +30,13 @@
     <li class="nav-item">
 <!--        <svg class="bi me-2" width="40" height="32"></svg>-->
         <a href="{% url 'upload' %}{{disk.id}}/{{catalog.id}}" class="nav-link active">
-            <img src="{% static 'foto/upload2.png'%}" width="25" height="25"> {{view2.tresc}} </a>
+            <img src="{% static 'foto/upload2.png'%}" width="20" height="20"> {{view2.tresc}} </a>
+    </li>
+    <br>
+    <li class="nav-item">
+<!--        <svg class="bi me-2" width="40" height="32"></svg>-->
+        <a href="{% url 'pasteFile' %}{{disk.id}}/{{catalog.id}}" class="nav-link active">
+            <img src="{% static 'foto/paste2.png'%}" width="20" height="20"> Wklej folder </a>
     </li>
 </ul>
 </div>
@@ -50,6 +56,7 @@
         <table class="w-100" cellspacing='0' cellpadding='5' border-spacing='5' style="margin:0;padding:0;border: 1px solid black;">
             <tr style="border: 1px solid black;">
                 <th style="border: 1px solid black;text-align:center;">Name</th>
+                <th style="border: 1px solid black;text-align:center;">Copy</th>
                 <th style="border: 1px solid black;text-align:center;">Size</th>
                 <th style="border: 1px solid black;text-align:center;">Delete</th>
             </tr>
@@ -62,10 +69,11 @@
             </a>
                 <button id="btn">...</button>
                 <form role="form" method="get" action="{% url 'changeNameFolder' %}{{sub_catalog.id}}">
-                    <input type="text" name="changeFolder" class="w-100 border-primary form-control" placeholder="Folder name" id="changeFolder">
-                    <input class="btn btn-primary" type="submit" value= "penis">
+                    <input type="text" name="changeFolder" class="w-100 border-primary form-control" placeholder="Uptade folder name" id="changeFolder">
+                    <input class="btn btn-primary" type="submit" value= "Uptade">
                 </form>
             </th>
+            <th style="border: 1px solid black;">  </th>
             <th style="border: 1px solid black;">  </th>
             <th style="border: 1px solid black;text-align:center;"><a href="{% url 'deleteCatalog' %}{{sub_catalog.id}}">
                 <img src="{% static 'foto/delete2.png'%}" width="25" height="25">
@@ -78,6 +86,10 @@
             <tr style="border: 1px solid black;">
                 <th style="border: 1px solid black;">
                     <a  href = "{{file.myfile.url}}" download> <img src="{% static 'foto/file2.png'%}" width="25" height="25"> {{file.myfile.name}}   </a>
+                </th>
+                <th style="border: 1px solid black;text-align:center;">
+                    <a href="{% url 'copyFile' %}{{catalog.id}}/{{file.id}}">
+                    <img src="{% static 'foto/copy2.png'%}" width="20" height="20"></a>
                 </th>
                 <th style="border: 1px solid black;text-align:center;">
                      {{file.myfile.size}}B

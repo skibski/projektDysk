@@ -35,4 +35,8 @@ urlpatterns=[
     path('catalogNadrzedny/', views.catalogNadrzedny, name='CatalogNadrzedny'),
     path('changeNameFolder/<int:folder_id>', views.changeNameFolder, name='changeNameFolder'),
     path('changeNameFolder/', views.changeNameFolder, name='changeNameFolder'),
+    path('copyFile/<int:catalog_id>/<int:plik_id>/', views.copyFile, name='copyFile'),
+    path('copyFile/', views.copyFile, name='copyFile'),
+    path('pasteFile/<int:disk_id>/<int:catalog_id>/', views.pasteFile, name='pasteFile'),
+    path('pasteFile/', views.pasteFile, name='pasteFile'),
 ]
