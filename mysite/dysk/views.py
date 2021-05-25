@@ -116,7 +116,33 @@ def changeNameFolder(request, folder_id):
     context = {'all_objects': all_objects}
     return render(request, 'pages/catalog.html', context)
 
+def stopSharing(request, file_id):
+    file= Document.objects.get(id=file_id)
+    catalog= file.id_katalogu
+    cat= catalog.id_katalogu_nadrzednego
+    sub_catalogs = Katalog.objects.filter(id_katalogu_nadrzednego=cat.id)
+    dysk= catalog.id_dysku
+    disk = Dysk.objects.filter(id=dysk.id_dysku)
+    file.udostepniony = False
+    file.save(update_fields=['udostepniony'])
+    view1 = Widok.objects.get(nazwa="catalog.html_adding_folder")
+    view2 = Widok.objects.get(nazwa="catalog.html_uploading_file")
+    context={'disk':disk, 'catalog': cat, 'files': file, 'sub_catalogs': sub_catalogs, 'view1': view1, 'view2': view2}
+    return render(request, 'pages/catalog.html', context)
 
+def startSharing(request, file_id):
+    file= Document.objects.get(id=file_id)
+    catalog= file.id_katalogu
+    cat= catalog.id_katalogu_nadrzednego
+    sub_catalogs = Katalog.objects.filter(id_katalogu_nadrzednego=cat.id)
+    dysk= catalog.id_dysku
+    disk = Dysk.objects.filter(id=dysk.id_dysku)
+    file.udostepniony = True
+    file.save(update_fields=['udostepniony'])
+    view1 = Widok.objects.get(nazwa="catalog.html_adding_folder")
+    view2 = Widok.objects.get(nazwa="catalog.html_uploading_file")
+    context={'disk':disk, 'catalog': cat, 'files': file, 'sub_catalogs': sub_catalogs, 'view1': view1, 'view2': view2}
+    return render(request, 'pages/catalog.html', context)
 
 
 def shareFile(request, file_id):

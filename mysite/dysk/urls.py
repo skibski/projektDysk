@@ -41,4 +41,9 @@ urlpatterns=[
     path('pasteFile/', views.pasteFile, name='pasteFile'),
     path('shareFile/', views.shareFile, name='shareFile'),
     path('shareFile/<int:file_id>/', views.shareFile, name='shareFile'),
+    path('stopSharing/<int:file_id>/', views.stopSharing, name='stopSharing'),
+    path('stopSharing/', views.stopSharing, name='stopSharing'),
+    path('startSharing/', views.startSharing, name='startSharing'),
+    path('startSharing/<int:file_id>/', views.startSharing, name='startSharing'),
+
 ]
