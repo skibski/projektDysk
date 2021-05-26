@@ -18,12 +18,10 @@
 <ul class="nav nav-pills flex-column mb-auto">
     <br>
       <li class="nav-item">
-<!--          <svg class="bi me-2" width="40" height="32"></svg>-->
             <form role="form" method="get" action="{% url 'addCatalogNadrzedny' %}{{disk.id}}/{{catalog.id}}">
           <input type="text" name="folder" class="w-100 border-primary form-control" placeholder="Folder name" id="folder">
-<!--            <a href="{% url 'addCatalogNadrzedny' %}{{disk.id}}/{{catalog.id}}" class="nav-link active btn btn-success">-->
               <div class="mt-2 ml-r w-100"><input class="btn btn-primary" type="submit" value= {{view1.tresc}}></div>
-<!--            <img src="{% static 'foto/add2.png'%}" width="25" height="25">  New catalog</a>-->
+
           </form>
       </li>
     <br>
@@ -74,6 +72,7 @@
                     <input class="btn btn-primary" type="submit" value= "Uptade">
                 </form>
             </th>
+            <th style="border: 1px solid black;">  </th>
             <th style="border: 1px solid black;">  </th>
             <th style="border: 1px solid black;">  </th>
             <th style="border: 1px solid black;text-align:center;"><a href="{% url 'deleteCatalog' %}{{sub_catalog.id}}">

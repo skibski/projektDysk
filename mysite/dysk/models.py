@@ -37,13 +37,17 @@ class Document(models.Model):
     name = models.CharField(max_length=255, default='Document_name')
     typ_pliku = models.CharField(max_length=200,default="*")
     sciezka_do_pliku = models.CharField(max_length=200,default="/")
-    udostepniony = models.BooleanField(default=False)
+    udostepnienie = models.BooleanField(default=False)
     myfile = models.FileField(validators=[
         FileExtensionValidator(allowed_extensions=['pdf', 'doc', 'ppt', 'xlsx', 'txt', 'jpg', 'png'])
     ])
 
     def __str__(self):
         return self.name
+
+# class SharedDocument(models.Model):
+#     id_dokumentu=models.ForeignKey(Document, on_delete=models.CASCADE, default=0)
+#     udostepniony=models.
 
 class Widok(models.Model):
     id_widoku = models.IntegerField(default=0)

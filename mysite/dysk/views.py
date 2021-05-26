@@ -123,8 +123,8 @@ def stopSharing(request, file_id):
     sub_catalogs = Katalog.objects.filter(id_katalogu_nadrzednego=cat.id)
     dysk= catalog.id_dysku
     disk = Dysk.objects.filter(id=dysk.id_dysku)
-    file.udostepniony = False
-    file.save(update_fields=['udostepniony'])
+    file.udostepnienie = 0
+    file.save(update_fields=['udostepnienie'])
     view1 = Widok.objects.get(nazwa="catalog.html_adding_folder")
     view2 = Widok.objects.get(nazwa="catalog.html_uploading_file")
     context={'disk':disk, 'catalog': cat, 'files': file, 'sub_catalogs': sub_catalogs, 'view1': view1, 'view2': view2}
@@ -132,13 +132,13 @@ def stopSharing(request, file_id):
 
 def startSharing(request, file_id):
     file= Document.objects.get(id=file_id)
-    catalog= file.id_katalogu
-    cat= catalog.id_katalogu_nadrzednego
-    sub_catalogs = Katalog.objects.filter(id_katalogu_nadrzednego=cat.id)
-    dysk= catalog.id_dysku
-    disk = Dysk.objects.filter(id=dysk.id_dysku)
-    file.udostepniony = True
-    file.save(update_fields=['udostepniony'])
+    catalog=file.id_katalogu
+    cat= Katalog.objects.get(id=catalog.id)
+    sub_catalogs = Katalog.objects.filter(id_katalogu_nadrzednego=cat.id_katalogu_nadrzednego)
+    dysk=cat.id_dysku
+    disk = Dysk.objects.filter(id=dysk.id)
+    file.udostepnienie = 1
+    file.save(update_fields=['udostepnienie'])
     view1 = Widok.objects.get(nazwa="catalog.html_adding_folder")
     view2 = Widok.objects.get(nazwa="catalog.html_uploading_file")
     context={'disk':disk, 'catalog': cat, 'files': file, 'sub_catalogs': sub_catalogs, 'view1': view1, 'view2': view2}
@@ -158,10 +158,8 @@ def addCatalogNadrzedny(request, disk_id, catalog_id):
     catalog.id_dysku = disk
     catalog.sciezka_do_katalogu = "/new_catalog"
     catalog.id_katalogu_nadrzednego = id_katalogu
-
     id_nadrzednego=catalog.id_katalogu_nadrzednego
     catalog.save()
-
     cat = Katalog.objects.get(id=id_nadrzednego.id)
     sub_catalogs = Katalog.objects.filter(id_katalogu_nadrzednego=id_nadrzednego.id)
     files = Document.objects.filter(id_katalogu=id_nadrzednego.id)
