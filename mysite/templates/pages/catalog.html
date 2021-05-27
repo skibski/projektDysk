@@ -92,7 +92,7 @@
                     <img src="{% static 'foto/copy2.png'%}" width="20" height="20"></a>
                 </th>
                 <th style="border: 1px solid black;text-align:center;">
-                    {% if file.udostepniony is True%}
+                    {% if file.udostepnienie is True%}
                     <a href="{% url 'stopSharing'%}{{file.id}}">
                     Stop sharing
                     </a>
