@@ -7,16 +7,16 @@ from django.shortcuts import get_object_or_404
 # admin ZAQ!2wsx
 
 def about(request):
-    view1 = Widok.objects.get(nazwa="about.html_head")
-    view2 = Widok.objects.get(nazwa="about.html")
-    context = {'view1': view1,'view2': view2}
+    #view1 = Widok.objects.get(nazwa="about.html_head")
+    #view2 = Widok.objects.get(nazwa="about.html")
+    #context = {'view1': view1,'view2': view2}
     return render(request, 'pages/about.html', context)
 
 def profile(request):
     all_objects=Dysk.objects.all()
-    view1 = Widok.objects.get(nazwa="profile.html_adding")
-    view2 = Widok.objects.get(nazwa="profile.html_welcome")
-    context={'all_objects': all_objects, 'view1': view1, 'view2': view2}
+    #view1 = Widok.objects.get(nazwa="profile.html_adding")
+    #view2 = Widok.objects.get(nazwa="profile.html_welcome")
+    context={'all_objects': all_objects}
     return render(request,'pages/profile.html', context)
 
 def disk(request, disk_id):
@@ -24,9 +24,9 @@ def disk(request, disk_id):
     catalog = Katalog.objects.get(id_dysku=disk, nazwa="root")
     sub_catalogs = Katalog.objects.filter(id_katalogu_nadrzednego=catalog)
     files = Document.objects.filter(id_katalogu=catalog)
-    view1 = Widok.objects.get(nazwa="catalog.html_adding_folder")
-    view2 = Widok.objects.get(nazwa="catalog.html_uploading_file")
-    mydict = {'disk': disk, 'catalog': catalog, 'files': files, 'sub_catalogs': sub_catalogs, 'view1': view1, 'view2': view2}
+    #view1 = Widok.objects.get(nazwa="catalog.html_adding_folder")
+    #view2 = Widok.objects.get(nazwa="catalog.html_uploading_file")
+    mydict = {'disk': disk, 'catalog': catalog, 'files': files, 'sub_catalogs': sub_catalogs}
     return render(request, 'pages/catalog.html', context=mydict)
 
 def diskDelete(request, disk_id):
@@ -34,9 +34,9 @@ def diskDelete(request, disk_id):
     disk.delete()
     # profile(request)
     all_objects=Dysk.objects.all()
-    view1 = Widok.objects.get(nazwa="catalog.html_adding_folder")
-    view2 = Widok.objects.get(nazwa="catalog.html_uploading_file")
-    context={'all_objects': all_objects, 'view1': view1, 'view2': view2}
+    #view1 = Widok.objects.get(nazwa="catalog.html_adding_folder")
+    #view2 = Widok.objects.get(nazwa="catalog.html_uploading_file")
+    context={'all_objects': all_objects}
     return render(request,'pages/profile.html', context)
 
 def catalog(request, disk_id, catalog_id):
@@ -44,9 +44,9 @@ def catalog(request, disk_id, catalog_id):
     catalog = Katalog.objects.get(id=catalog_id)
     sub_catalogs = Katalog.objects.filter(id_katalogu_nadrzednego=catalog_id)
     files = Document.objects.filter(id_katalogu=catalog)
-    view1 = Widok.objects.get(nazwa="catalog.html_adding_folder")
-    view2 = Widok.objects.get(nazwa="catalog.html_uploading_file")
-    mydict = {'disk': disk, 'catalog': catalog, 'files': files, 'sub_catalogs': sub_catalogs, 'view1': view1, 'view2': view2}
+    #view1 = Widok.objects.get(nazwa="catalog.html_adding_folder")
+    #view2 = Widok.objects.get(nazwa="catalog.html_uploading_file")
+    mydict = {'disk': disk, 'catalog': catalog, 'files': files, 'sub_catalogs': sub_catalogs}
     return render(request, 'pages/catalog.html', context=mydict)
 
 def catalogNadrzedny(request, disk_id, catalog_id, catalog_nadrzedny_id):
@@ -66,9 +66,9 @@ def addStandard(request, user_id):
     disk.save()
     # profile(request)
     all_objects = Dysk.objects.all()
-    view1 = Widok.objects.get(nazwa="catalog.html_adding_folder")
-    view2 = Widok.objects.get(nazwa="catalog.html_uploading_file")
-    context = {'all_objects': all_objects, 'view1': view1, 'view2': view2}
+    #view1 = Widok.objects.get(nazwa="catalog.html_adding_folder")
+    #view2 = Widok.objects.get(nazwa="catalog.html_uploading_file")
+    context = {'all_objects': all_objects}
     root = Katalog()
     root.nazwa="root"
     root.id_dysku=disk
@@ -85,9 +85,9 @@ def addPremium(request, user_id):
     disk.save()
     # profile(request)
     all_objects = Dysk.objects.all()
-    view1 = Widok.objects.get(nazwa="catalog.html_adding_folder")
-    view2 = Widok.objects.get(nazwa="catalog.html_uploading_file")
-    context = {'all_objects': all_objects, 'view1': view1, 'view2': view2}
+    #view1 = Widok.objects.get(nazwa="catalog.html_adding_folder")
+    #view2 = Widok.objects.get(nazwa="catalog.html_uploading_file")
+    context = {'all_objects': all_objects}
     root = Katalog()
     root.nazwa = "root"
     root.id_dysku = disk
@@ -98,9 +98,9 @@ def addPremium(request, user_id):
 def addCatalog(request, disk_id):
     disk = Dysk.objects.get(id=disk_id)
     all_objects = Katalog.objects.all()
-    view1 = Widok.objects.get(nazwa="catalog.html_adding_folder")
-    view2 = Widok.objects.get(nazwa="catalog.html_uploading_file")
-    context = {'all_objects': all_objects, 'view1': view1, 'view2': view2}
+    #view1 = Widok.objects.get(nazwa="catalog.html_adding_folder")
+    #view2 = Widok.objects.get(nazwa="catalog.html_uploading_file")
+    context = {'all_objects': all_objects}
     catalog = Katalog()
     catalog.nazwa = "new_catalog"
     catalog.id_dysku = disk
@@ -125,8 +125,8 @@ def stopSharing(request, file_id):
     disk = Dysk.objects.filter(id=dysk.id_dysku)
     file.udostepnienie = 0
     file.save(update_fields=['udostepnienie'])
-    view1 = Widok.objects.get(nazwa="catalog.html_adding_folder")
-    view2 = Widok.objects.get(nazwa="catalog.html_uploading_file")
+    #view1 = Widok.objects.get(nazwa="catalog.html_adding_folder")
+    #view2 = Widok.objects.get(nazwa="catalog.html_uploading_file")
     context={'disk':disk, 'catalog': cat, 'files': file, 'sub_catalogs': sub_catalogs, 'view1': view1, 'view2': view2}
     return render(request, 'pages/catalog.html', context)
 
@@ -139,9 +139,9 @@ def startSharing(request, file_id):
     disk = Dysk.objects.filter(id=dysk.id)
     file.udostepnienie = 1
     file.save(update_fields=['udostepnienie'])
-    view1 = Widok.objects.get(nazwa="catalog.html_adding_folder")
-    view2 = Widok.objects.get(nazwa="catalog.html_uploading_file")
-    context={'disk':disk, 'catalog': cat, 'files': file, 'sub_catalogs': sub_catalogs, 'view1': view1, 'view2': view2}
+    #view1 = Widok.objects.get(nazwa="catalog.html_adding_folder")
+    #view2 = Widok.objects.get(nazwa="catalog.html_uploading_file")
+    context={'disk':disk, 'catalog': cat, 'files': file, 'sub_catalogs': sub_catalogs}
     return render(request, 'pages/catalog.html', context)
 
 
@@ -163,9 +163,9 @@ def addCatalogNadrzedny(request, disk_id, catalog_id):
     cat = Katalog.objects.get(id=id_nadrzednego.id)
     sub_catalogs = Katalog.objects.filter(id_katalogu_nadrzednego=id_nadrzednego.id)
     files = Document.objects.filter(id_katalogu=id_nadrzednego.id)
-    view1 = Widok.objects.get(nazwa="catalog.html_adding_folder")
-    view2 = Widok.objects.get(nazwa="catalog.html_uploading_file")
-    mydict = {'disk': disk, 'catalog': cat, 'files': files, 'sub_catalogs': sub_catalogs, 'view1': view1, 'view2': view2}
+    #view1 = Widok.objects.get(nazwa="catalog.html_adding_folder")
+    #view2 = Widok.objects.get(nazwa="catalog.html_uploading_file")
+    mydict = {'disk': disk, 'catalog': cat, 'files': files, 'sub_catalogs': sub_catalogs}
     return render(request, 'pages/catalog.html', context=mydict)
 
 def deleteCatalog(request, catalog_id):
@@ -178,9 +178,9 @@ def deleteCatalog(request, catalog_id):
     catalog = Katalog.objects.get(id=id_nadrzednego.id)
     sub_catalogs = Katalog.objects.filter(id_katalogu_nadrzednego=id_nadrzednego.id)
     files = Document.objects.filter(id_katalogu=id_nadrzednego.id)
-    view1 = Widok.objects.get(nazwa="catalog.html_adding_folder")
-    view2 = Widok.objects.get(nazwa="catalog.html_uploading_file")
-    mydict = {'disk': disk, 'catalog': catalog, 'files': files, 'sub_catalogs': sub_catalogs, 'view1': view1, 'view2': view2}
+    #view1 = Widok.objects.get(nazwa="catalog.html_adding_folder")
+    #view2 = Widok.objects.get(nazwa="catalog.html_uploading_file")
+    mydict = {'disk': disk, 'catalog': catalog, 'files': files, 'sub_catalogs': sub_catalogs}
     return render(request, 'pages/catalog.html', context=mydict)
 
 def upload(request, disk_id, catalog_id):
@@ -259,10 +259,9 @@ def copyFile(request, catalog_id, plik_id):
     # zwykłe wyswietlanie aktualnego katalogu
     sub_catalogs = Katalog.objects.filter(id_katalogu_nadrzednego=catalog_id)
     files = Document.objects.filter(id_katalogu=catalog)
-    view1 = Widok.objects.get(nazwa="catalog.html_adding_folder")
-    view2 = Widok.objects.get(nazwa="catalog.html_uploading_file")
-    mydict = {'disk': disk, 'catalog': catalog, 'files': files, 'sub_catalogs': sub_catalogs, 'view1': view1,
-              'view2': view2}
+    #view1 = Widok.objects.get(nazwa="catalog.html_adding_folder")
+    #view2 = Widok.objects.get(nazwa="catalog.html_uploading_file")
+    mydict = {'disk': disk, 'catalog': catalog, 'files': files, 'sub_catalogs': sub_catalogs}
     return render(request, 'pages/catalog.html', context=mydict)
 
 def pasteFile(request, disk_id, catalog_id):
@@ -297,9 +296,8 @@ def pasteFile(request, disk_id, catalog_id):
     # zwykłe wyświetlanie aktualnego katalogu
     sub_catalogs = Katalog.objects.filter(id_katalogu_nadrzednego=catalog_id)
     files = Document.objects.filter(id_katalogu=catalog)
-    view1 = Widok.objects.get(nazwa="catalog.html_adding_folder")
-    view2 = Widok.objects.get(nazwa="catalog.html_uploading_file")
-    mydict = {'disk': disk, 'catalog': catalog, 'files': files, 'sub_catalogs': sub_catalogs, 'view1': view1,
-              'view2': view2}
+    #view1 = Widok.objects.get(nazwa="catalog.html_adding_folder")
+    #view2 = Widok.objects.get(nazwa="catalog.html_uploading_file")
+    mydict = {'disk': disk, 'catalog': catalog, 'files': files, 'sub_catalogs': sub_catalogs}
     return render(request, 'pages/catalog.html', context=mydict)
 
