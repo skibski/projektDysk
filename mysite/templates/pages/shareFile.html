@@ -4,7 +4,7 @@
 {% block title %}Share File{% endblock %}
 
 {% block content %}
-{% if file.udostepniony is True %}
+{% if file.udostepnienie is True %}
 <a  href = "{{file.myfile.url}}" download> <img src="{% static 'foto/file2.png'%}" width="25" height="25"> {{file.myfile.name}}   </a>
 
 {% else %}

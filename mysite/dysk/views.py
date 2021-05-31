@@ -127,7 +127,7 @@ def stopSharing(request, file_id):
     file.save(update_fields=['udostepnienie'])
     #view1 = Widok.objects.get(nazwa="catalog.html_adding_folder")
     #view2 = Widok.objects.get(nazwa="catalog.html_uploading_file")
-    context={'disk':disk, 'catalog': cat, 'files': file, 'sub_catalogs': sub_catalogs, 'view1': view1, 'view2': view2}
+    context={'disk':disk, 'catalog': cat, 'files': file, 'sub_catalogs': sub_catalogs}
     return render(request, 'pages/catalog.html', context)
 
 def startSharing(request, file_id):
@@ -254,6 +254,34 @@ def copyFile(request, catalog_id, plik_id):
     schowek = SchowekPlik()
     schowek.id_pliku = plik
     schowek.id_user = user
+    schowek.wycinanie = False
+    schowek.save()
+
+    # zwykłe wyswietlanie aktualnego katalogu
+    sub_catalogs = Katalog.objects.filter(id_katalogu_nadrzednego=catalog_id)
+    files = Document.objects.filter(id_katalogu=catalog)
+    #view1 = Widok.objects.get(nazwa="catalog.html_adding_folder")
+    #view2 = Widok.objects.get(nazwa="catalog.html_uploading_file")
+    mydict = {'disk': disk, 'catalog': catalog, 'files': files, 'sub_catalogs': sub_catalogs}
+    return render(request, 'pages/catalog.html', context=mydict)
+
+def cutFile(request, catalog_id, plik_id):
+    catalog = Katalog.objects.get(id=catalog_id)
+    disk = Dysk.objects.get(id=catalog.id_dysku.id)
+    user = User.objects.get(id=disk.id_user.id)
+    # opróżnianie schowka danego użytkownika
+    if SchowekPlik.objects.filter(id_user=user).exists():
+        p = SchowekPlik.objects.filter(id_user=user)[:1].get()
+        p.delete()
+    # p = SchowekFolder.objects.filter()[:1].get()
+    # p.delete()
+
+    # zapisanie kopii do schowka
+    plik = Document.objects.get(id=plik_id)
+    schowek = SchowekPlik()
+    schowek.id_pliku = plik
+    schowek.id_user = user
+    schowek.wycinanie = True
     schowek.save()
 
     # zwykłe wyswietlanie aktualnego katalogu
@@ -285,8 +313,10 @@ def pasteFile(request, disk_id, catalog_id):
         plik_skopiowany.myfile = plik.myfile
         plik_skopiowany.save()
 
-        # opróżnienie schowka <- na razie zakomentowane, bo chyba po wklejeniu nie powinno usuwać się ze schowka
-        # p.delete()
+        if SchowekPlik.wycinanie:
+            p = SchowekPlik.objects.filter(id_user=user)[:1].get()
+            p.delete()
+            plik.delete()
 
         # aktualizacja rozmiaru dysku
         s = disk.rozmiar_zajety
@@ -300,4 +330,6 @@ def pasteFile(request, disk_id, catalog_id):
     #view2 = Widok.objects.get(nazwa="catalog.html_uploading_file")
     mydict = {'disk': disk, 'catalog': catalog, 'files': files, 'sub_catalogs': sub_catalogs}
     return render(request, 'pages/catalog.html', context=mydict)
+
+
 

@@ -58,3 +58,4 @@ class SchowekPlik(models.Model):
     id_schowka = models.IntegerField(default=0)
     id_pliku = models.ForeignKey(Document, on_delete=models.CASCADE, default=0)
     id_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    wycinanie = models.BooleanField(default=False)

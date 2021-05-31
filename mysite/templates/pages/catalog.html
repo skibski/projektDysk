@@ -20,7 +20,7 @@
       <li class="nav-item">
             <form role="form" method="get" action="{% url 'addCatalogNadrzedny' %}{{disk.id}}/{{catalog.id}}">
           <input type="text" name="folder" class="w-100 border-primary form-control" placeholder="Folder name" id="folder">
-              <div class="mt-2 ml-r w-100"><input class="btn btn-primary" type="submit" value= {{view1.tresc}}></div>
+              <div class="mt-2 ml-r w-100"><input class="btn btn-primary" type="submit" value= "Dodaj folder"></div>
 
           </form>
       </li>
@@ -28,7 +28,7 @@
     <li class="nav-item">
 <!--        <svg class="bi me-2" width="40" height="32"></svg>-->
         <a href="{% url 'upload' %}{{disk.id}}/{{catalog.id}}" class="nav-link active">
-            <img src="{% static 'foto/upload2.png'%}" width="20" height="20"> {{view2.tresc}} </a>
+            <img src="{% static 'foto/upload2.png'%}" width="20" height="20"> Upload </a>
     </li>
     <br>
     <li class="nav-item">
@@ -89,6 +89,8 @@
                 </th>
                 <th style="border: 1px solid black;text-align:center;">
                     <a href="{% url 'copyFile' %}{{catalog.id}}/{{file.id}}">
+                    <img src="{% static 'foto/copy2.png'%}" width="20" height="20"></a>
+                    <a href="{% url 'cutFile' %}{{catalog.id}}/{{file.id}}">
                     <img src="{% static 'foto/copy2.png'%}" width="20" height="20"></a>
                 </th>
                 <th style="border: 1px solid black;text-align:center;">
