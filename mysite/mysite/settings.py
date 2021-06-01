@@ -86,29 +86,29 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 #
 #     }
 # }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'rrqgmstv',
-#         'USER': 'rrqgmstv',
-#         'PASSWORD': 'GS1-pMG8sloaXRsUyMRIBCPbVe-Kum1R',
-#         'HOST': 'manny.db.elephantsql.com',
-#         'PORT': '5432',
-#
-#     }
-# }
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dyskTest',
-        'USER': 'postgres',
-        'PASSWORD': 'admin',
-        'HOST': 'localhost',
+        'NAME': 'rrqgmstv',
+        'USER': 'rrqgmstv',
+        'PASSWORD': 'GS1-pMG8sloaXRsUyMRIBCPbVe-Kum1R',
+        'HOST': 'manny.db.elephantsql.com',
         'PORT': '5432',
 
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'dyskTest',
+#         'USER': 'postgres',
+#         'PASSWORD': 'admin',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#
+#     }
+# }
 
 
 
