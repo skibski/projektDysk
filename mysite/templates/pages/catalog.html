@@ -20,7 +20,7 @@
       <li class="nav-item">
             <form role="form" method="get" action="{% url 'addCatalogNadrzedny' %}{{disk.id}}/{{catalog.id}}">
           <input type="text" name="folder" class="w-100 border-primary form-control" placeholder="Folder name" id="folder">
-              <div class="mt-2 ml-r w-100"><input class="btn btn-primary" type="submit" value= "Dodaj folder"></div>
+              <div class="mt-2 ml-r w-100"><input class="btn btn-primary" type="submit" value= "Add folder"></div>
 
           </form>
       </li>
@@ -34,7 +34,7 @@
     <li class="nav-item">
 <!--        <svg class="bi me-2" width="40" height="32"></svg>-->
         <a href="{% url 'pasteFile' %}{{disk.id}}/{{catalog.id}}" class="nav-link active">
-            <img src="{% static 'foto/paste2.png'%}" width="20" height="20"> Wklej folder </a>
+            <img src="{% static 'foto/paste2.png'%}" width="20" height="20"> Paste file </a>
     </li>
 </ul>
 </div>
@@ -91,7 +91,7 @@
                     <a href="{% url 'copyFile' %}{{catalog.id}}/{{file.id}}">
                     <img src="{% static 'foto/copy2.png'%}" width="20" height="20"></a>
                     <a href="{% url 'cutFile' %}{{catalog.id}}/{{file.id}}">
-                    <img src="{% static 'foto/copy2.png'%}" width="20" height="20"></a>
+                    <img src="{% static 'foto/cut2.png'%}" width="20" height="20"></a>
                 </th>
                 <th style="border: 1px solid black;text-align:center;">
                     {% if file.udostepnienie is True%}
