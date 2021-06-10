@@ -198,14 +198,23 @@ def upload(request, disk_id, catalog_id):
             doc = form.save()
             s = disk.rozmiar_zajety
             s = s+doc.myfile.size
+            # to jeszcze nie tak
+            # if s > int(input(Dysk.rozmiar_calkowity)):
+            #     # przed usunieciem z /media przegladam tez, czy gdzieś nie ma kopii tego pliku, żeby nie spowodować błędu
+            #     if Document.objects.filter(myfile=file.myfile).exists():
+            #         doc.delete()
+            #     else:
+            #         doc.myfile.delete()
+            #         doc.delete()
+            # else:
             Dysk.objects.filter(id=disk_id).update(rozmiar_zajety=s)
 
             return render(request, 'pages/upload.html', {
-               "form": DocumentForm(),
-               "uploaded_file_url": doc.myfile.url,
-               "username": username,
-               "disk": disk,
-               "catalog": catalog
+                "form": DocumentForm(),
+                "uploaded_file_url": doc.myfile.url,
+                "username": username,
+                "disk": disk,
+                "catalog": catalog
             })
     else:
         form = DocumentForm()
