@@ -118,8 +118,10 @@ def changeNameFolder(request, folder_id):
 
 def stopSharing(request, file_id):
     file= Document.objects.get(id=file_id)
-    catalog= file.id_katalogu
-    cat= catalog.id_katalogu_nadrzednego
+    catalog= Katalog.objects.get(id=file.id_katalogu.id)
+    cat=Katalog.objects.get(id=file.id_katalogu.id);
+    if(Katalog.objects.filter(id_katalogu_nadrzednego=True)):
+        cat= Katalog.objects.get(id=catalog.id_katalogu_nadrzednego.id)
     sub_catalogs = Katalog.objects.filter(id_katalogu_nadrzednego=cat.id)
     dysk= catalog.id_dysku
     disk = Dysk.objects.filter(id=dysk.id_dysku)
@@ -127,8 +129,8 @@ def stopSharing(request, file_id):
     file.save(update_fields=['udostepnienie'])
     #view1 = Widok.objects.get(nazwa="catalog.html_adding_folder")
     #view2 = Widok.objects.get(nazwa="catalog.html_uploading_file")
-    context={'disk':disk, 'catalog': cat, 'files': file, 'sub_catalogs': sub_catalogs}
-    return render(request, 'pages/catalog.html', context)
+    mydict={'disk':disk, 'catalog': cat, 'files': file, 'sub_catalogs': sub_catalogs}
+    return render(request, 'pages/catalog.html', context=mydict)
 
 def startSharing(request, file_id):
     file= Document.objects.get(id=file_id)
@@ -141,8 +143,8 @@ def startSharing(request, file_id):
     file.save(update_fields=['udostepnienie'])
     #view1 = Widok.objects.get(nazwa="catalog.html_adding_folder")
     #view2 = Widok.objects.get(nazwa="catalog.html_uploading_file")
-    context={'disk':disk, 'catalog': cat, 'files': file, 'sub_catalogs': sub_catalogs}
-    return render(request, 'pages/catalog.html', context)
+    mydict={'disk':disk, 'catalog': cat, 'files': file, 'sub_catalogs': sub_catalogs}
+    return render(request, 'pages/catalog.html', context=mydict)
 
 
 def shareFile(request, file_id):
@@ -194,10 +196,14 @@ def upload(request, disk_id, catalog_id):
         username = ''
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)
+
         if form.is_valid():
             doc = form.save()
+            doc.name = doc.myfile.name
+            doc.save()
             s = disk.rozmiar_zajety
             s = s+doc.myfile.size
+
             # to jeszcze nie tak
             # if s > int(input(Dysk.rozmiar_calkowity)):
             #     # przed usunieciem z /media przegladam tez, czy gdzieś nie ma kopii tego pliku, żeby nie spowodować błędu
@@ -322,7 +328,7 @@ def pasteFile(request, disk_id, catalog_id):
         plik_skopiowany.myfile = plik.myfile
         plik_skopiowany.save()
 
-        if SchowekPlik.wycinanie:
+        if (plik_kopiowany.wycinanie):
             p = SchowekPlik.objects.filter(id_user=user)[:1].get()
             p.delete()
             plik.delete()
