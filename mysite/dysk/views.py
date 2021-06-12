@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Dysk, Katalog, Plik, Document, Widok, SchowekPlik
 from django.contrib.auth.models import User
 from .forms import DocumentForm
@@ -143,8 +143,8 @@ def startSharing(request, file_id):
     file.save(update_fields=['udostepnienie'])
     #view1 = Widok.objects.get(nazwa="catalog.html_adding_folder")
     #view2 = Widok.objects.get(nazwa="catalog.html_uploading_file")
-    mydict={'disk':disk, 'catalog': cat, 'files': file, 'sub_catalogs': sub_catalogs}
-    return render(request, 'pages/catalog.html', context=mydict)
+    mydict={'files': file}
+    return redirect(shareFile, file_id=file.id)
 
 
 def shareFile(request, file_id):
