@@ -117,6 +117,7 @@ def changeNameFolder(request, folder_id):
     return render(request, 'pages/catalog.html', context)
 
 def stopSharing(request, file_id):
+
     file= Document.objects.get(id=file_id)
     catalog= Katalog.objects.get(id=file.id_katalogu.id)
     cat=Katalog.objects.get(id=file.id_katalogu.id);
@@ -124,26 +125,23 @@ def stopSharing(request, file_id):
         cat= Katalog.objects.get(id=catalog.id_katalogu_nadrzednego.id)
     sub_catalogs = Katalog.objects.filter(id_katalogu_nadrzednego=cat.id)
     dysk= catalog.id_dysku
-    disk = Dysk.objects.filter(id=dysk.id_dysku)
+
+
     file.udostepnienie = 0
     file.save(update_fields=['udostepnienie'])
+    files = Document.objects.filter(id_katalogu=catalog)
     #view1 = Widok.objects.get(nazwa="catalog.html_adding_folder")
     #view2 = Widok.objects.get(nazwa="catalog.html_uploading_file")
-    mydict={'disk':disk, 'catalog': cat, 'files': file, 'sub_catalogs': sub_catalogs}
+    mydict={'disk':dysk, 'catalog': catalog, 'files': files, 'sub_catalogs': sub_catalogs}
     return render(request, 'pages/catalog.html', context=mydict)
 
 def startSharing(request, file_id):
     file= Document.objects.get(id=file_id)
     catalog=file.id_katalogu
     cat= Katalog.objects.get(id=catalog.id)
-    sub_catalogs = Katalog.objects.filter(id_katalogu_nadrzednego=cat.id_katalogu_nadrzednego)
     dysk=cat.id_dysku
-    disk = Dysk.objects.filter(id=dysk.id)
     file.udostepnienie = 1
     file.save(update_fields=['udostepnienie'])
-    #view1 = Widok.objects.get(nazwa="catalog.html_adding_folder")
-    #view2 = Widok.objects.get(nazwa="catalog.html_uploading_file")
-    mydict={'files': file}
     return redirect(shareFile, file_id=file.id)
 
 
