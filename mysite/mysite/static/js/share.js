@@ -6,3 +6,8 @@ function copyURI(evt) {
       /* clipboard write failed */
     });
 }
+
+function copyURI2(evt) {
+    evt.preventDefault();
+    navigator.clipboard.writeText(evt.target.previousSibling.textContent).then();
+}
