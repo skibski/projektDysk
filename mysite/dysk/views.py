@@ -291,12 +291,11 @@ def cutFile(request, catalog_id, plik_id):
 
     # zapisanie kopii do schowka
     plik = Document.objects.get(id=plik_id)
-    schowek = SchowekPlik()
-    schowek.id_pliku = plik
-    schowek.id_user = user
-    schowek.wycinanie = True
-    schowek.save()
-
+    schoweks = SchowekPlik()
+    schoweks.id_pliku = plik
+    schoweks.id_user = user
+    schoweks.wycinanie = True
+    schoweks.save()
     # zwykłe wyswietlanie aktualnego katalogu
     sub_catalogs = Katalog.objects.filter(id_katalogu_nadrzednego=catalog_id)
     files = Document.objects.filter(id_katalogu=catalog)
