@@ -11,8 +11,3 @@ function copyURI2(evt) {
     evt.preventDefault();
     navigator.clipboard.writeText(evt.target.previousSibling.textContent).then();
 }
-
-var exampleEl = document.getElementById('myBtn')
-var popover = new bootstrap.Popover(document.querySelector('.example-popover'), {
-  container: 'body'
-})
