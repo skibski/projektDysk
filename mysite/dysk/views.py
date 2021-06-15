@@ -188,6 +188,8 @@ def deleteCatalog(request, catalog_id):
 def upload(request, disk_id, catalog_id):
     disk = Dysk.objects.get(id=disk_id)
     catalog = Katalog.objects.get(id=catalog_id)
+    sub_catalogs = Katalog.objects.filter(id_katalogu_nadrzednego=catalog.id)
+    files = Document.objects.filter(id_katalogu=catalog.id)
     if request.user.is_authenticated:
         # Is it better to use @login_required ?
         username = request.user.username
@@ -215,16 +217,18 @@ def upload(request, disk_id, catalog_id):
             # else:
             Dysk.objects.filter(id=disk_id).update(rozmiar_zajety=s)
 
-            return render(request, 'pages/upload.html', {
+            return render(request, 'pages/catalog.html', {
                 "form": DocumentForm(),
                 "uploaded_file_url": doc.myfile.url,
                 "username": username,
                 "disk": disk,
-                "catalog": catalog
+                "catalog": catalog,
+                "sub_catalogs": sub_catalogs,
+                "files": files
             })
     else:
         form = DocumentForm()
-    return render(request, 'pages/upload.html', {"form": form, "disk": disk, "catalog": catalog})
+    return render(request, 'pages/catalog.html', {"form": form, "disk": disk, "catalog": catalog, "sub_catalogs": sub_catalogs,"files": files})
 
 def deleteFile(request, plik_id):
     file = Document.objects.get(id=plik_id)

@@ -5,53 +5,80 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-    {% ifequal disk.id_user|stringformat:"s" user.get_username %}
+{% ifequal disk.id_user|stringformat:"s" user.get_username %}
 
 <div class="d-flex fixed-top" style="margin-top: 56px;">
     <div class="d-flex flex-column p-3 text-white  bg-dark" style="width: 280px; height: 100vh;">
 
         <p class="fs-4 d-flex  align-items-center mx-3 mb-md-0 me-md-auto text-white text-decoration-none">
-       Disk {{disk.id}}
-    </p>
+            Disk {{disk.id}}
+        </p>
 
         <hr>
-<ul class="nav nav-pills flex-column mb-auto">
-    <br>
-      <li class="nav-item">
-            <form role="form" method="get" action="{% url 'addCatalogNadrzedny' %}{{disk.id}}/{{catalog.id}}">
-          <input type="text" name="folder" class="w-100 border-primary form-control" placeholder="Folder name" id="folder">
-              <div class="mt-2 ml-r w-100"><input class="btn btn-primary" type="submit" value= "Add folder"></div>
+        <ul class=" nav nav-pills flex-column mb-auto">
+            <br>
+            <li class="w-100 nav-item">
+                <p class="fs-5 align-items-center mx-3 mb-md-3 me-md-auto text-white text-decoration-none">
+                    Add folder
+                </p>
+                <form role="form" method="get" action="{% url 'addCatalogNadrzedny' %}{{disk.id}}/{{catalog.id}}">
+                    <input type="text" name="folder" class="w-100 border-primary form-control" placeholder="Folder name"
+                           id="folder">
+                    <div class="mt-2 ml-r w-100"><input class="btn btn-primary" type="submit" value="Add folder"></div>
 
-          </form>
-      </li>
-    <br>
-    <li class="nav-item">
-<!--        <svg class="bi me-2" width="40" height="32"></svg>-->
-        <a href="{% url 'upload' %}{{disk.id}}/{{catalog.id}}" class="nav-link active">
-            <img src="{% static 'foto/upload2.png'%}" width="20" height="20"> Upload </a>
-    </li>
-    <br>
-    <li class="nav-item">
-<!--        <svg class="bi me-2" width="40" height="32"></svg>-->
-        <a href="{% url 'pasteFile' %}{{disk.id}}/{{catalog.id}}" class="nav-link active">
-            <img src="{% static 'foto/paste2.png'%}" width="20" height="20"> Paste file </a>
-    </li>
-</ul>
-</div>
-   <div class="w-100" style="margin-left: 20px; margin-right: 20px;">
-       <br>
-       <h5><a href="{% url 'profile' %}" style="text-decoration: none; color: black;"> Profile </a>
-            ||  <a href="{% url 'disk' %}{{disk.id}}" style="text-decoration: none; color: black;"> Disk {{disk.id}} </a>
-       {% if catalog.nazwa != "root" %}
-<!--           {% if request.get_full_path != "/disk/66/" %}-->
-<!--           {% endif %}-->
-            ||  <a href="{% url 'catalog' %}{{disk.id}}/{{catalog.id}}" style="text-decoration: none; color: black;"> Catalog {{catalog.id}}</a>
+                </form>
+            </li>
+            <br>
+            <li class="w-100 nav-item">
+                <svg class="bi me-2" width="40" height="32"></svg>
+                <p class="fs-5 align-items-center mx-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                    Upload file
+                </p>
+                <form method="post" enctype="multipart/form-data" action="{% url 'upload' %}{{disk.id}}/{{catalog.id}}/">
+                    {% csrf_token %}
+
+                    <p class="d-none"><label for="id_id_katalogu">Id katalogu:</label> <select name="id_katalogu" id="id_id_katalogu">
+                        <option value={{catalog.id}}>Katalog object {{catalog.id}}</option>
+                    </select></p>
+                    <p><label for="id_myfile"></label> <input type="file" name="myfile" required="" id="id_myfile"></p>
+
+                    <button class="nav-link active" type="submit"> <img src="{% static 'foto/upload2.png'%}" width="20" height="20"> Upload</button>
+                </form>
+                {% if uploaded_file_url %}
+                <p class="text-white">File uploaded</p>
+                {% endif %}
+<!--                <svg class="bi me-2" width="40" height="32"></svg>-->
+<!--                <a href="{% url 'upload' %}{{disk.id}}/{{catalog.id}}" class="nav-link active">-->
+<!--                    <img src="{% static 'foto/upload2.png'%}" width="20" height="20"> Upload </a>-->
+            </li>
+            <br>
+            <li class="nav-item">
+                <svg class="bi me-2" width="40" height="32"></svg>
+                <p class="fs-5 align-items-center mx-3 mb-md-3 me-md-auto text-white text-decoration-none">
+                    Paste file
+                </p>
+
+                <a href="{% url 'pasteFile' %}{{disk.id}}/{{catalog.id}}" class="nav-link active">
+                    <img src="{% static 'foto/paste2.png'%}" width="20" height="20"> Paste file </a>
+            </li>
+        </ul>
+    </div>
+    <div class="w-100" style="margin-left: 20px; margin-right: 20px;">
+        <br>
+        <h5><a href="{% url 'profile' %}" style="text-decoration: none; color: black;"> Profile </a>
+            || <a href="{% url 'disk' %}{{disk.id}}" style="text-decoration: none; color: black;"> Disk {{disk.id}} </a>
+            {% if catalog.nazwa != "root" %}
+            <!--           {% if request.get_full_path != "/disk/66/" %}-->
+            <!--           {% endif %}-->
+            || <a href="{% url 'catalog' %}{{disk.id}}/{{catalog.id}}" style="text-decoration: none; color: black;">
+                Catalog {{catalog.id}}</a>
 
             {% endif %}
 
-</h5>
+        </h5>
         <br>
-        <table class="w-100" cellspacing='0' cellpadding='5' border-spacing='5' style="margin:0;padding:0;border: 1px solid black;">
+        <table class="w-100" cellspacing='0' cellpadding='5' border-spacing='5'
+               style="margin:0;padding:0;border: 1px solid black;">
             <tr style="border: 1px solid black;">
                 <th style="border: 1px solid black;text-align:center;">Name</th>
                 <th style="border: 1px solid black;text-align:center;">Copy</th>
@@ -62,74 +89,88 @@
             {% for sub_catalog in sub_catalogs %}
 
             <tr style="border: 1px solid black;">
-            <th style="border: 1px solid black;">
-                <div class="d-flex  justify-content-between">
-                <a style="margin-top:5px;" href="{% url 'catalog' %}{{disk.id}}/{{sub_catalog.id}}">
-                <img src="{% static 'foto/folder2.png'%}" width="25" height="25">
-                {{sub_catalog.nazwa}}
-            </a>
+                <th style="border: 1px solid black;">
+                    <div class="d-flex  justify-content-between">
+                        <a style="margin-top:5px;" href="{% url 'catalog' %}{{disk.id}}/{{sub_catalog.id}}">
+                            <img src="{% static 'foto/folder2.png'%}" width="25" height="25">
+                            {{sub_catalog.nazwa}}
+                        </a>
 
-<!--                <button id="btn">...</button>-->
-                <form role="form" method="get" action="{% url 'changeNameFolder' %}{{disk.id}}/{{sub_catalog.id}}">
-                    <div class="w-100 d-flex  justify-content-between">
-                    <input style="margin-right:10px;" type="text" name="changeFolder" class="w-100 border-primary form-control" placeholder="Update folder name" id="changeFolder">
-                    <input class="btn btn-primary" type="submit" value= "Update">
+                        <!--                <button id="btn">...</button>-->
+                        <form role="form" method="get"
+                              action="{% url 'changeNameFolder' %}{{disk.id}}/{{sub_catalog.id}}">
+                            <div class="w-100 d-flex  justify-content-between">
+                                <input style="margin-right:10px;" type="text" name="changeFolder"
+                                       class="w-100 border-primary form-control" placeholder="Update folder name"
+                                       id="changeFolder">
+                                <input class="btn btn-primary" type="submit" value="Update">
+                            </div>
+                        </form>
                     </div>
-                </form>
-                </div>
-            </th>
-            <th style="border: 1px solid black;">  </th>
-            <th style="border: 1px solid black;">  </th>
-            <th style="border: 1px solid black;">  </th>
-            <th style="border: 1px solid black;text-align:center;"><a href="{% url 'deleteCatalog' %}{{sub_catalog.id}}">
-                <img src="{% static 'foto/delete2.png'%}" width="25" height="25">
-            </a></th>
+                </th>
+                <th style="border: 1px solid black;"></th>
+                <th style="border: 1px solid black;"></th>
+                <th style="border: 1px solid black;"></th>
+                <th style="border: 1px solid black;text-align:center;"><a
+                        href="{% url 'deleteCatalog' %}{{sub_catalog.id}}">
+                    <img src="{% static 'foto/delete2.png'%}" width="25" height="25">
+                </a></th>
             </tr>
             {% endfor %}
 
 
-        {% for file in files %}
+            {% for file in files %}
             <tr style="border: 1px solid black;">
                 <th style="border: 1px solid black;">
-                    <a  href = "{{file.myfile.url}}" download> <img src="{% static 'foto/file2.png'%}" width="25" height="25"> {{file.myfile.name}}   </a>
+                    <a href="{{file.myfile.url}}" download> <img src="{% static 'foto/file2.png'%}" width="25"
+                                                                 height="25"> {{file.myfile.name}} </a>
                 </th>
                 <th style="border: 1px solid black;text-align:center;">
                     <a href="{% url 'copyFile' %}{{catalog.id}}/{{file.id}}">
-                    <img src="{% static 'foto/copy2.png'%}" width="20" height="20"></a>
+                        <img src="{% static 'foto/copy2.png'%}" width="20" height="20"></a>
                     <a href="{% url 'cutFile' %}{{catalog.id}}/{{file.id}}">
-                    <img src="{% static 'foto/cut2.png'%}" width="20" height="20"></a>
+                        <img src="{% static 'foto/cut2.png'%}" width="20" height="20"></a>
                 </th>
                 <th style="border: 1px solid black;text-align:center;">
                     {% if file.udostepnienie is True%}
-                    <div class="w-100 d-flex  justify-content-between" >
-                    <a style="margin-top:5px;" href="{% url 'stopSharing'%}{{file.id}}">
-                    Stop sharing
-                    </a>
-                    <br>
-<!--                    nie rozdzielać enterem tego p i button -->
-                    <div class="d-flex align-self-center"><p id="copy" style="margin-top:5px;margin-right:10px;margin-bottom:0; padding:5.5px;" class="align-self-center alert-primary">127.0.0.1:8000{% url 'shareFile'%}{{file.id}}</p><button type="button" id="myBtn" class="align-self-center btn btn-primary" onclick="copyURI2(event)">Kopiuj link</button>
-                    </div></div>
+                    <div class="w-100 d-flex  justify-content-between">
+                        <a style="margin-top:5px;" href="{% url 'stopSharing'%}{{file.id}}">
+                            Stop sharing
+                        </a>
+                        <br>
+                        <!--                    nie rozdzielać enterem tego p i button -->
+                        <div class="d-flex align-self-center"><p id="copy"
+                                                                 style="margin-top:5px;margin-right:10px;margin-bottom:0; padding:5.5px;"
+                                                                 class="align-self-center alert-primary">
+                            127.0.0.1:8000{% url 'shareFile'%}{{file.id}}</p>
+                            <button type="button" id="myBtn" class="align-self-center btn btn-primary"
+                                    onclick="copyURI2(event)">Kopiuj link
+                            </button>
+                        </div>
+                    </div>
                     {% else %}
-                     <img src="{% static 'foto/outline_share_black_24dp.png'%}" width="25" height="25"><a href="{% url 'startSharing'%}{{file.id}}">
-                        Share
-                    </a>
+                    <img src="{% static 'foto/outline_share_black_24dp.png'%}" width="25" height="25"><a
+                        href="{% url 'startSharing'%}{{file.id}}">
+                    Share
+                </a>
                     {% endif %}
                 </th>
                 <th style="border: 1px solid black;text-align:center;">
-                     {{file.myfile.size}}B
+                    {{file.myfile.size}}B
                 </th>
-                <th style="border: 1px solid black;text-align:center;"> <a href="{% url 'deleteFile' %}{{file.id}}">
-                <img src="{% static 'foto/delete2.png'%}" width="25" height="25">
-            </a> </th>
+                <th style="border: 1px solid black;text-align:center;"><a href="{% url 'deleteFile' %}{{file.id}}">
+                    <img src="{% static 'foto/delete2.png'%}" width="25" height="25">
+                </a></th>
             </tr>
-        {% endfor %}
-        </table></div>
+            {% endfor %}
+        </table>
     </div>
-    {% else %}
-    <h4>ACCESS DENIED</h4>
-    {% endifequal %}
+</div>
 {% else %}
-      <h4>You are not logged in</h4>
+<h4>ACCESS DENIED</h4>
+{% endifequal %}
+{% else %}
+<h4>You are not logged in</h4>
 {% endif %}
 <script src="{% static 'js/share.js'%}"></script>
 {% endblock %}
