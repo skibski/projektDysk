@@ -108,13 +108,15 @@ def addCatalog(request, disk_id):
     catalog.save()
     return render(request, 'pages/profile.html',context)
 
-def changeNameFolder(request, folder_id):
+def changeNameFolder(request, disk_id, folder_id):
+    disk = Dysk.objects.get(id=disk_id)
     test = Katalog.objects.get(id=folder_id)
     test.nazwa = request.GET.get('changeFolder')
     test.save(update_fields=['nazwa'])
-    all_objects = Katalog.objects.all()
-    context = {'all_objects': all_objects}
-    return render(request, 'pages/catalog.html', context)
+    sub_catalogs = Katalog.objects.filter(id_katalogu_nadrzednego=test.id_katalogu_nadrzednego)
+    files = Document.objects.filter(id_katalogu=test)
+    mydict = {'disk': disk, 'catalog': test.id_katalogu_nadrzednego, 'files': files, 'sub_catalogs': sub_catalogs}
+    return render(request, 'pages/catalog.html', context=mydict)
 
 def stopSharing(request, file_id):
 

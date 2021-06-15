@@ -70,7 +70,7 @@
             </a>
 
 <!--                <button id="btn">...</button>-->
-                <form role="form" method="get" action="{% url 'changeNameFolder' %}{{sub_catalog.id}}">
+                <form role="form" method="get" action="{% url 'changeNameFolder' %}{{disk.id}}/{{sub_catalog.id}}">
                     <div class="w-100 d-flex  justify-content-between">
                     <input style="margin-right:10px;" type="text" name="changeFolder" class="w-100 border-primary form-control" placeholder="Update folder name" id="changeFolder">
                     <input class="btn btn-primary" type="submit" value= "Update">
