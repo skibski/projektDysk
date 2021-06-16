@@ -229,7 +229,9 @@ def upload(request, disk_id, catalog_id):
                 #         doc.myfile.delete()
                 #         doc.delete()
                 # else:
-                    Dysk.objects.filter(id=disk_id).update(rozmiar_zajety=s)
+
+
+                    # Dysk.objects.filter(id=disk_id).update(rozmiar_zajety=s)
 
                     return render(request, 'pages/catalog.html', {
                         "form": DocumentForm(),
@@ -336,7 +338,7 @@ def cutFile(request, catalog_id, plik_id):
         return render(request, 'pages/error.html')
 
 def pasteFile(request, disk_id, catalog_id):
-    try:
+    # try:
         catalog = Katalog.objects.get(id=catalog_id)
         disk = Dysk.objects.get(id=disk_id)
         user = User.objects.get(id=disk.id_user.id)
@@ -359,13 +361,13 @@ def pasteFile(request, disk_id, catalog_id):
 
             if (plik_kopiowany.wycinanie):
                 p = SchowekPlik.objects.filter(id_user=user)[:1].get()
-                p.delete()
-                plik.delete()
-
-            # aktualizacja rozmiaru dysku
-            s = disk.rozmiar_zajety
-            s = s + plik.myfile.size
-            Dysk.objects.filter(id=disk_id).update(rozmiar_zajety=s)
+                s = disk.rozmiar_zajety
+                s = s - plik.myfile.size
+            else:
+                # aktualizacja rozmiaru dysku
+                s = disk.rozmiar_zajety
+                s = s + plik.myfile.size
+                Dysk.objects.filter(id=disk_id).update(rozmiar_zajety=s)
 
         # zwykłe wyświetlanie aktualnego katalogu
         sub_catalogs = Katalog.objects.filter(id_katalogu_nadrzednego=catalog_id)
@@ -374,8 +376,8 @@ def pasteFile(request, disk_id, catalog_id):
         #view2 = Widok.objects.get(nazwa="catalog.html_uploading_file")
         mydict = {'disk': disk, 'catalog': catalog, 'files': files, 'sub_catalogs': sub_catalogs}
         return render(request, 'pages/catalog.html', context=mydict)
-    except:
-        return render(request, 'pages/error.html')
+    # except:
+    #     return render(request, 'pages/error.html')
 
 
 
