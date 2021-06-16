@@ -1,7 +1,26 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About{% endblock %}
 
 {% block content %}
 
-<h4>{{view1.tresc}}</h4>
-<p>{{view2.tresc}}</p>
+<div class="bg-image hover-zoom" style="background-image: url({% static 'foto/strzalki.png'%}); height: 95vh; background-size: cover;
+ background-repeat: no-repeat; margin-top: -5vh; overflow: hidden;">
+<!--    <div class="mask w-100 h-100" style="background: linear-gradient(-->
+<!--        45deg,-->
+<!--        rgba(29, 236, 197, 0.5),-->
+<!--        rgba(91, 14, 214, 0.5) 100%-->
+<!--      );">-->
+    <div class="w-100 text-center d-flex">
+        <div class="w-50"></div>
+<div class="w-100 text-center">
+    <h1 style="font-family: 'Bebas Neue', cursive; letter-spacing: 5px; font-size:18vh;" class="w-100 text-primary display-1 mt-5">E-disc</h1>
+      <h2 style="font-family: 'Bebas Neue', cursive; letter-spacing: 5px;" class="w-100 text-primary display-1 mt-5 ">Your virtual file folder</h2>
+    <h3 style="font-family: 'Bebas Neue', cursive; letter-spacing: 5px;" class="h3 mt-2 mb-3 fw-normal "><strong>A place where you can put your files </strong></h3>
+        <h3 style="font-family: 'Bebas Neue', cursive; letter-spacing: 5px;" class="h3 mt-2 mb-3 fw-normal "><strong>wherever you are,</strong></h3>
+    <h3 style="font-family: 'Bebas Neue', cursive; letter-spacing: 5px;" class="h3 mt-2 mb-3 fw-normal "><strong>at any time.</strong></h3>
+
+
+</div></div></div>
 {% endblock %}

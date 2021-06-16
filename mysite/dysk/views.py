@@ -10,6 +10,8 @@ def about(request):
     #view1 = Widok.objects.get(nazwa="about.html_head")
     #view2 = Widok.objects.get(nazwa="about.html")
     #context = {'view1': view1,'view2': view2}
+    all_objects = Dysk.objects.all()
+    context = {'all_objects': all_objects}
     return render(request, 'pages/about.html', context)
 
 def profile(request):
