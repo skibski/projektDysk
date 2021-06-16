@@ -7,6 +7,8 @@
 {% if user.is_authenticated %}
 {% ifequal disk.id_user|stringformat:"s" user.get_username %}
 
+<script>console.log("xxx");</script>
+
 <div class="d-flex fixed-top" style="margin-top: 56px;">
     <div class="d-flex flex-column p-3 text-white  bg-dark" style="width: 280px; height: 100vh;">
 
