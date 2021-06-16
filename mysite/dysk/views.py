@@ -202,11 +202,12 @@ def upload(request, disk_id, catalog_id):
         form = DocumentForm(request.POST, request.FILES)
 
         if form.is_valid():
-            doc = form.save()
-            doc.name = doc.myfile.name
-            doc.save()
-            s = disk.rozmiar_zajety
-            s = s+doc.myfile.size
+            if disk.update_size(request.FILES['myfile'].size):
+                doc = form.save()
+                doc.name = doc.myfile.name
+                doc.save()
+                s = disk.rozmiar_zajety
+                s = s+doc.myfile.size
 
             # to jeszcze nie tak
             # if s > int(input(Dysk.rozmiar_calkowity)):
@@ -217,17 +218,17 @@ def upload(request, disk_id, catalog_id):
             #         doc.myfile.delete()
             #         doc.delete()
             # else:
-            Dysk.objects.filter(id=disk_id).update(rozmiar_zajety=s)
+                Dysk.objects.filter(id=disk_id).update(rozmiar_zajety=s)
 
-            return render(request, 'pages/catalog.html', {
-                "form": DocumentForm(),
-                "uploaded_file_url": doc.myfile.url,
-                "username": username,
-                "disk": disk,
-                "catalog": catalog,
-                "sub_catalogs": sub_catalogs,
-                "files": files
-            })
+                return render(request, 'pages/catalog.html', {
+                    "form": DocumentForm(),
+                    "uploaded_file_url": doc.myfile.url,
+                    "username": username,
+                    "disk": disk,
+                    "catalog": catalog,
+                    "sub_catalogs": sub_catalogs,
+                    "files": files
+                })
     else:
         form = DocumentForm()
     return render(request, 'pages/catalog.html', {"form": form, "disk": disk, "catalog": catalog, "sub_catalogs": sub_catalogs,"files": files})
