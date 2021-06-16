@@ -217,8 +217,8 @@ def upload(request, disk_id, catalog_id):
                     doc = form.save()
                     doc.name = doc.myfile.name
                     doc.save()
-                    s = disk.rozmiar_zajety
-                    s = s+doc.myfile.size
+                    # s = disk.rozmiar_zajety
+                    # s = s+doc.myfile.size
 
                 # to jeszcze nie tak
                 # if s > int(input(Dysk.rozmiar_calkowity)):
@@ -242,6 +242,8 @@ def upload(request, disk_id, catalog_id):
                         "sub_catalogs": sub_catalogs,
                         "files": files
                     })
+                else:
+                    return render(request, 'pages/size_error.html')
         else:
             form = DocumentForm()
         return render(request, 'pages/catalog.html', {"form": form, "disk": disk, "catalog": catalog, "sub_catalogs": sub_catalogs,"files": files})
