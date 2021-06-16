@@ -78,25 +78,6 @@ def addStandard(request, user_id):
     root.save()
     return render(request, 'pages/profile.html', context)
 
-def addPremium(request, user_id):
-    u = User.objects.get(id=user_id)
-    disk = Dysk()
-    disk.rozmiar_calkowity=5
-    disk.rozmiar_zajety=0
-    disk.id_user=u
-    disk.save()
-    # profile(request)
-    all_objects = Dysk.objects.all()
-    #view1 = Widok.objects.get(nazwa="catalog.html_adding_folder")
-    #view2 = Widok.objects.get(nazwa="catalog.html_uploading_file")
-    context = {'all_objects': all_objects}
-    root = Katalog()
-    root.nazwa = "root"
-    root.id_dysku = disk
-    root.sciezka_do_katalogu = "/"
-    root.save()
-    return render(request, 'pages/profile.html', context)
-
 def addCatalog(request, disk_id):
     disk = Dysk.objects.get(id=disk_id)
     all_objects = Katalog.objects.all()

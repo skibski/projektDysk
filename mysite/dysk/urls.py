@@ -14,8 +14,6 @@ urlpatterns=[
     path('deleteCatalog/',views.deleteCatalog, name='deleteCatalog'),
     path('addStandard/<int:user_id>/',views.addStandard, name='addStandard'),
     path('addStandard',views.addStandard, name='addStandard'),
-    path('addPremium/<int:user_id>/',views.addPremium, name='addPremium'),
-    path('addPremium',views.addPremium, name='addPremium'),
     path('accounts/', include('accounts.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('disk/<int:disk_id>/',views.disk, name='disk'),
