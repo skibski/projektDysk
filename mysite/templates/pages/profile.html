@@ -38,7 +38,8 @@
                 <a href="{% url 'disk' %}{{object.id}}">
                 <img src="{% static 'foto/hdd2.png'%}" width="25" height="25">
                 {{object.id}}  </a></th>
-            <th style="border: 1px solid black;text-align:center;">{{object.calculate}}%</th>
+            <th style="border: 1px solid black;text-align:center;">
+                <div class="d-inline-block" style="width:40px; height: 40px;"><canvas id="{{object.calculate}}" ></canvas> {{object.calculate}}%</div></th>
             <th style="border: 1px solid black;text-align:center;"><a href="{% url 'diskDelete' %}{{object.id}}">
             <img src="{% static 'foto/delete2.png'%}" width="25" height="25">
             </a></th>
@@ -84,4 +85,6 @@
 
 </div>
 {% endif %}
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js" integrity="sha512-VCHVc5miKoln972iJPvkQrUYYq7XpxXzvqNfiul1H4aZDwGBGC0lq373KNleaB2LpnC2a/iNfE5zoRYmB4TRDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{% static 'js/profile_charts.js'%}"></script>
 {% endblock %}
