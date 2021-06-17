@@ -366,7 +366,6 @@ def pasteFile(request, disk_id, catalog_id):
                 s = disk.rozmiar_zajety
                 s = s - plik.myfile.size
                 plik.delete()
-                Dysk.objects.filter(id=disk_id).update(rozmiar_zajety=s)
             else:
                 # aktualizacja rozmiaru dysku
                 s = disk.rozmiar_zajety
