@@ -140,9 +140,7 @@
                             Stop sharing
                         </a>
                         <br>
-                        <!--                    nie rozdzielać enterem tego p i button -->
-                        <div class="d-flex align-self-center"><p id="copy" style="margin-top:5px;margin-right:10px;margin-bottom:0; padding:5.5px;" class="align-self-center alert-primary">http://165.227.165.148{% url 'shareFile'%}{{file.id}}</p><button type="button" id="myBtn" class="align-self-center btn btn-primary" onclick="copyURI2(event)">Kopiuj link
-                            </button>
+                        <div class="d-flex align-self-center"><p id="copy" style="margin-top:5px;margin-right:10px;margin-bottom:0; padding:5.5px;" class="align-self-center alert-primary">http://165.227.165.148{% url 'shareFile'%}{{file.id}}</p>
                         </div>
                     </div>
                     {% else %}
