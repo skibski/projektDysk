@@ -15,6 +15,14 @@ class Dysk(models.Model):
     def calculate(self):
         return (self.rozmiar_zajety * 100)/(self.rozmiar_calkowity*1000)
 
+    def update_size(self, file_size):
+        if self.rozmiar_zajety + file_size < self.rozmiar_calkowity * 1000:
+            self.rozmiar_zajety += file_size
+            self.save()
+            return True
+        else:
+            return False
+
 class Katalog(models.Model):
     id_katalogu = models.IntegerField(default=0)
     nazwa = models.CharField(max_length=200)
@@ -44,6 +52,8 @@ class Document(models.Model):
 
     def __str__(self):
         return self.name
+
+
 
 # class SharedDocument(models.Model):
 #     id_dokumentu=models.ForeignKey(Document, on_delete=models.CASCADE, default=0)

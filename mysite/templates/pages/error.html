@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About{% endblock %}
+
+{% block content %}
+
+<div class="bg-image hover-zoom" style="background-image: url({% static 'foto/strzalki.png'%}); height: 95vh; background-size: cover;
+ background-repeat: no-repeat; margin-top: -5vh; overflow: hidden;">
+<!--    <div class="mask w-100 h-100" style="background: linear-gradient(-->
+<!--        45deg,-->
+<!--        rgba(29, 236, 197, 0.5),-->
+<!--        rgba(91, 14, 214, 0.5) 100%-->
+<!--      );">-->
+    <div class="w-100 text-center d-flex">
+        <div class="w-50"></div>
+<div class="w-100 text-center">
+    <h1 style="font-family: 'Bebas Neue', cursive; letter-spacing: 5px; font-size:18vh;" class="w-100 text-primary display-1 mt-5">Sorry...</h1>
+      <h2 style="font-family: 'Bebas Neue', cursive; letter-spacing: 5px;" class="w-100 text-primary display-1 mt-5 ">Something went wrong :(</h2>
+</div></div></div>
+{% endblock %}

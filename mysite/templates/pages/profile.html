@@ -15,12 +15,8 @@
     <ul class="nav nav-pills flex-column mb-auto">
         <br>
       <li class="nav-item">
-    <a href="{% url 'addStandard' %}/{{user.id}}" class="nav-link active"><img src="{% static 'foto/add2.png'%}" width="20" height="20">    Standard - 1KB</a>
-      </li>
-        <br>
-        <li class="nav-item">
-    <a href="{% url 'addPremium' %}/{{user.id}}" class="nav-link active"><img src="{% static 'foto/add2.png'%}" width="20" height="20">     Premium - 5KB</a>
-        </li></ul>
+    <a href="{% url 'addStandard' %}/{{user.id}}" class="nav-link active"><img src="{% static 'foto/add2.png'%}" width="20" height="20">    New disk  1KB</a>
+      </li></ul>
     </div>
     <div class="w-100 text-center" style="margin-left: 300px; margin-right: 20px;">
     <br>
@@ -42,7 +38,8 @@
                 <a href="{% url 'disk' %}{{object.id}}">
                 <img src="{% static 'foto/hdd2.png'%}" width="25" height="25">
                 {{object.id}}  </a></th>
-            <th style="border: 1px solid black;text-align:center;">{{object.calculate}}%</th>
+            <th style="border: 1px solid black;text-align:center;">
+                <div class="d-inline-block" style="width:40px; height: 40px;"><canvas id="{{object.calculate}}" ></canvas> {{object.calculate}}%</div></th>
             <th style="border: 1px solid black;text-align:center;"><a href="{% url 'diskDelete' %}{{object.id}}">
             <img src="{% static 'foto/delete2.png'%}" width="25" height="25">
             </a></th>
@@ -52,6 +49,42 @@
     </table>
     </div></div>
 {% else %}
-      <h4>You are not logged in</h4>
+<div class="d-flex ">
+<img style="height:85vh;" class="img-responsive" src="{% static 'foto/ludzik.jpg'%}" >
+    <div class="w-100 text-center">
+      <h1 style="font-family: 'Bebas Neue', cursive; letter-spacing: 5px;" class="w-100 text-primary display-1 mt-2 ">Your virtual file folder</h1>
+    <main class="form-signing">
+    <form method="post">
+
+    <h1 style="margin-top: 7vh;" class="h3 mt-2 mb-3 fw-normal "><strong>Create an account</strong></h1>
+
+{% csrf_token %}
+        <p style="height: 50px;">
+            <input style="height: 50px;margin-left: auto;margin-right: auto;" class="w-25 border-primary form-control" type="text" name="username" maxlength="150" autocapitalize="none" autocomplete="username" placeholder="Username" autofocus="" required="" id="id_username">
+        </p>
+        <p style="height: 50px;">
+            <input style="height: 50px;margin-left: auto;margin-right: auto;" class="w-25 border-primary form-control" type="email" name="email" maxlength="150" autocapitalize="none" autocomplete="email" placeholder="Email" autofocus="" required="" id="id_email">
+        </p>
+        <p>
+            <input style="height: 50px;margin-left: auto;margin-right: auto;" class="w-25 border-primary form-control" type="password" name="password1" autocomplete="new-password" placeholder="Password" required="" id="id_password1">
+
+        </p>
+        <p style="font-size: 12px; margin-top: -15px;">Your password must contain at least 8 characters.</p>
+        <p>
+            <input style="height: 50px;margin-left: auto;margin-right: auto;" class="w-25 border-primary form-control" type="password" name="password2" autocomplete="new-password" placeholder="Confirm the password" required="" id="id_password2">
+        <p style="margin-top: -15px;font-size: 12px;" class="helptext">Enter the same password as before, for verification.</p>
+        </p>
+    <button class="w-25 btn btn-lg btn-primary" type="submit">Sign up</button>
+
+  </form>
+</main>
+        <br>
+       <p >Or, if you already have an account</p>
+        <p class="text-center" ><a class="w-25 btn btn-lg btn-primary mb-5" href="{% url 'login' %}">Log In</a>
+    </div>
+
+</div>
 {% endif %}
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js" integrity="sha512-VCHVc5miKoln972iJPvkQrUYYq7XpxXzvqNfiul1H4aZDwGBGC0lq373KNleaB2LpnC2a/iNfE5zoRYmB4TRDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{% static 'js/profile_charts.js'%}"></script>
 {% endblock %}

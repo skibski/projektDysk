@@ -1,0 +1,30 @@
+13:00:firefox:2
+14:01:ls:0
+15:03:ls:2
+16:04:cat plik.txt:1
+22:05:whoami:2
+21:06:id:2
+23:07:ls -d:2
+15:08:echo "jestem":2
+19:09:ls |wc -m:2
+10:01:locate plik.txt:1
+01:11:ls:0
+00:12:ps:2
+05:13:ps:2
+07:14:env:2
+11:00:firefox:2
+08:01:ls -a:2
+09:03:echo "mode.2 :2
+11:04:ps f:1
+23:05:whoami:0
+22:06:id:2
+20:07:ls *.txt:1
+19:08:echo "jestem":2
+17:09:ls |wc -l:2
+00:01:locate plik.txt:2
+15:13:ps:2
+12:14:env:1
+04:13:ps:2
+06:14:env:0
+11:54:locate plik.txt:0
+11:56:echo "jestem:2

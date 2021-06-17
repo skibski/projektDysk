@@ -1,0 +1,1 @@
+id_dysku;rozmiar_calkowity;rozmiar_zajety;id_uzytkownika
