@@ -5,10 +5,16 @@
 
 {% block content %}
 {% if file.udostepnienie is True %}
-<a  href = "{{file.myfile.url}}" download > <img src="{% static 'foto/file2.png'%}" width="25" height="25"> {{file.myfile.name}}   </a>
-<div></div>
-<a  href = "{% url 'shareFile'%}{{file.id}}"  onclick="copyURI(event)"> Copy link to clipboard  </a>
-
+<div class="bg-image hover-zoom" style="background-image: url({% static 'foto/strzalki.png'%}); height: 95vh; background-size: cover;
+ background-repeat: no-repeat; margin-top: -5vh; overflow: hidden;">
+<div class="text-center">
+    <br>
+<p style="letter-spacing: 2px; font-size:3rem; margin-top: 30vh;">{{file.myfile.name}}</p>
+    <a  href = "{{file.myfile.url}}" download ><button class="btn btn-primary"><i class="fa fa-download"></i> Download</button></a>
+<br>
+    <br>
+</div>
+</div>
 {% else %}
 <p>Brak pliku</p>
 {% endif %}

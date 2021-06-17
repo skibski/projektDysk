@@ -1,6 +1,6 @@
 function copyURI(evt) {
     evt.preventDefault();
-    navigator.clipboard.writeText("http://142.93.105.213"+evt.target.getAttribute('href')).then(() => {
+    navigator.clipboard.writeText("http://165.227.165.148"+evt.target.getAttribute('href')).then(() => {
 
     }, () => {
       /* clipboard write failed */

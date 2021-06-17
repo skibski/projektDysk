@@ -128,8 +128,6 @@ def stopSharing(request, file_id):
             cat= Katalog.objects.get(id=catalog.id_katalogu_nadrzednego.id)
         sub_catalogs = Katalog.objects.filter(id_katalogu_nadrzednego=cat.id)
         dysk= catalog.id_dysku
-
-
         file.udostepnienie = 0
         file.save(update_fields=['udostepnienie'])
         files = Document.objects.filter(id_katalogu=catalog)
